@@ -76,12 +76,12 @@
   },
   "topTracksByYear": {
     "title": "Top Track by Year",
-    "subtitle": "Your most played track for each year",
+    "subtitle": "Your most played track per year",
     "headerYear": "Year",
     "headerMonth": "Month",
     "showByMonth": "Show by Month",
     "titleMonth": "Top Track by Month",
-    "subtitleMonth": "Your most played track for each month"
+    "subtitleMonth": "Your most played track per month"
   },
   "topArtists": {
     "title": "Top Artists",
@@ -100,8 +100,8 @@
   "reasonStartTracks": {
     "title": { "clickrow": "Your Favorites", "backbtn": "Once is not enough" },
     "subtitle": {
-      "clickrow": "These are the tracks you started manually most often",
-      "backbtn": "These are the tracks you started over again"
+      "clickrow": "Tracks you started manually",
+      "backbtn": "Tracks you started over again"
     },
     "labelReason": "Start Reason",
     "labelMinDuration": "Min Duration (s)",

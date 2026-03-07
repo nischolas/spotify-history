@@ -15,7 +15,7 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
   const { openPlayer } = usePreviewPlayer();
   const [showMoreModal, setShowMoreModal] = useState(false);
 
-  const CUTOFF = 10000;
+  const CUTOFF = 5000;
 
   const skippedTracks = useMemo(() => {
     const skipped = rawData.filter((item) => item.ms_played < CUTOFF);

@@ -84,7 +84,7 @@
   },
   "topArtists": {
     "title": "Top-Künstler",
-    "subtitle": "nach kumulierter Wiedergabezeit",
+    "subtitle": "nach Wiedergabezeit",
     "unknown": "Unbekannt",
     "tracksBy": "Top-Tracks von {{artist}}",
     "search": "Filtern...",
