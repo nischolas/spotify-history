@@ -11,6 +11,7 @@ export default defineConfig({
         globPatterns: ["**/*.{js,css,html,png,svg,ico,woff,woff2}"],
       },
       manifest: {
+        lang: "de",
         name: "Spotify Streamingverlauf",
         short_name: "Spotify",
         description: "Erkunde deinen Spotify Streamingverlauf",
