@@ -86,7 +86,8 @@
   "topArtists": {
     "title": "Top Artists",
     "subtitle": "by accumulated playtime",
-    "unknown": "Unknown"
+    "unknown": "Unknown",
+    "tracksBy": "Tracks by {{artist}}"
   },
   "skippedTracks": {
     "title": "Most Skipped Tracks",

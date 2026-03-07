@@ -9,9 +9,10 @@ interface TopTracksProps {
   limit?: number;
   isModal?: boolean;
   sortBy?: "time" | "count";
+  artistFilter?: string;
 }
 
-export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = false, sortBy = "time" }) => {
+export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = false, sortBy = "time", artistFilter }) => {
   const { aggregatedData } = useSpotifyStore();
   const { t } = useTranslation();
   const { openPlayer } = usePreviewPlayer();
@@ -19,9 +20,12 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
   const [sortByState, setSortBy] = useState<"time" | "count">(sortBy);
 
   const sortedData = useMemo(() => {
-    return [...aggregatedData]
+    const data = artistFilter
+      ? aggregatedData.filter((item) => item.master_metadata_album_artist_name === artistFilter)
+      : aggregatedData;
+    return [...data]
       .sort((a, b) => {
-        if (sortByState === "time") {
+        if (sortByState === "time" || artistFilter) {
           let aValue: any = a["ms_played"];
           let bValue: any = b["ms_played"];
 
@@ -38,26 +42,28 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
         }
       })
       .slice(0, limit);
-  }, [aggregatedData, limit, sortByState]);
+  }, [aggregatedData, limit, sortByState, artistFilter]);
 
   return (
     <>
       <div className="table-container">
         <div className="header-row">
           <div className="title">
-            <h3>{t("topTracks.title")}</h3>
-            <p>
-              {t("topTracks.subtitle")}{" "}
-              <span className="sort-toggle">
-                <button className={`toggle-btn ${sortByState === "time" ? "active" : ""}`} onClick={() => setSortBy("time")}>
-                  {t("topTracks.sortByTime")}
-                </button>
-                <span>&nbsp;{t("common.or")}&nbsp;</span>
-                <button className={`toggle-btn ${sortByState === "count" ? "active" : ""}`} onClick={() => setSortBy("count")}>
-                  {t("topTracks.sortByCount")}
-                </button>
-              </span>
-            </p>
+            <h3>{artistFilter ? t("topArtists.tracksBy", { artist: artistFilter }) : t("topTracks.title")}</h3>
+            {!artistFilter && (
+              <p>
+                {t("topTracks.subtitle")}{" "}
+                <span className="sort-toggle">
+                  <button className={`toggle-btn ${sortByState === "time" ? "active" : ""}`} onClick={() => setSortBy("time")}>
+                    {t("topTracks.sortByTime")}
+                  </button>
+                  <span>&nbsp;{t("common.or")}&nbsp;</span>
+                  <button className={`toggle-btn ${sortByState === "count" ? "active" : ""}`} onClick={() => setSortBy("count")}>
+                    {t("topTracks.sortByCount")}
+                  </button>
+                </span>
+              </p>
+            )}
           </div>
           {!isModal && (
             <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
@@ -70,7 +76,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
             <tr>
               <th>#</th>
               <th>{t("table.headerTitle")}</th>
-              <th>{t("table.headerArtist")}</th>
+              {!artistFilter && <th>{t("table.headerArtist")}</th>}
               <th style={{ textAlign: "right" }}>{sortByState === "time" ? t("table.headerTimePlayed") : t("table.headerPlayCount")}</th>
             </tr>
           </thead>
@@ -90,7 +96,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
                 >
                   <td>{index + 1}</td>
                   <td>{item.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
-                  <td>{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
+                  {!artistFilter && <td>{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>}
                   <td className="monospace">
                     {sortByState === "time" ? (
                       <>

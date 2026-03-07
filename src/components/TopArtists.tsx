@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { formatMsPlain } from "../utils/formatTime";
 import { useTranslation } from "react-i18next";
 import { Modal } from "./Modal";
+import { TopTracks } from "./TopTracks";
 
 interface TopArtistsProps {
   limit?: number;
@@ -13,6 +14,7 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
   const { aggregatedData } = useSpotifyStore();
   const { t } = useTranslation();
   const [showMoreModal, setShowMoreModal] = useState(false);
+  const [selectedArtist, setSelectedArtist] = useState<string | null>(null);
 
   const topArtists = useMemo(() => {
     const grouped = new Map<string, number>();
@@ -59,7 +61,12 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
               const { hours, minutes } = formatMsPlain(artist.ms_played);
 
               return (
-                <tr key={index}>
+                <tr
+                  key={index}
+                  onClick={() => setSelectedArtist(artist.artist)}
+                  style={{ cursor: "pointer" }}
+                  title={t("topTracks.title")}
+                >
                   <td>{index + 1}</td>
                   <td>{artist.artist}</td>
                   <td className="monospace">
@@ -76,6 +83,10 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
 
       <Modal isOpen={showMoreModal} onClose={() => setShowMoreModal(false)}>
         <TopArtists limit={100} isModal={true} />
+      </Modal>
+
+      <Modal isOpen={selectedArtist !== null} onClose={() => setSelectedArtist(null)}>
+        {selectedArtist && <TopTracks artistFilter={selectedArtist} isModal={true} limit={100} sortBy="time" />}
       </Modal>
     </>
   );
