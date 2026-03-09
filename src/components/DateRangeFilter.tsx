@@ -44,6 +44,7 @@ export const DateRangeFilter: React.FC = () => {
           }).length,
       );
 
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setMonths(monthsArray);
       setMonthlyCounts(counts);
       setMinMonthIndex(0);
