@@ -26,7 +26,19 @@ export const FileUpload: React.FC = () => {
       try {
         const json = JSON.parse(content);
         if (Array.isArray(json)) {
-          allData.push(...json);
+          for (const item of json) {
+            allData.push({
+              ts: item.ts,
+              ms_played: item.ms_played,
+              spotify_track_uri: item.spotify_track_uri ?? null,
+              master_metadata_track_name: item.master_metadata_track_name ?? null,
+              master_metadata_album_artist_name: item.master_metadata_album_artist_name ?? null,
+              reason_start: item.reason_start,
+              reason_end: item.reason_end,
+              shuffle: item.shuffle,
+              platform: item.platform,
+            });
+          }
         }
       } catch (err) {
         console.error(`Error parsing file ${filename}:`, err);
