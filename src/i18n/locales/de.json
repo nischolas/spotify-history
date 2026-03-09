@@ -8,7 +8,7 @@
     "recoveryTitle": "Vorherige Daten gefunden",
     "recoveryMessage": "Es sind noch vorherige Daten auf deinem Gerät gespeichert. Möchtest du diese laden?",
     "loadBtn": "Daten laden",
-    "discardBtn": "Löschen & Neu importieren"
+    "discardBtn": "Löschen"
   },
   "generalStats": {
     "totalTime": "Gesamtdauer",
