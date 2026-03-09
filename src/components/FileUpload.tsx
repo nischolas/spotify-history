@@ -49,31 +49,32 @@ export const FileUpload: React.FC = () => {
       const file = files[i];
 
       if (file.name.endsWith(".zip")) {
-        const zipPromise = new Promise<void>(async (resolve, reject) => {
-          try {
-            const zip = await JSZip.loadAsync(file);
-            const zipFilePromises: Promise<void>[] = [];
+        const zipPromise = new Promise<void>((resolve, reject) => {
+          JSZip.loadAsync(file)
+            .then((zip) => {
+              const zipFilePromises: Promise<void>[] = [];
 
-            zip.forEach((relativePath, zipEntry) => {
-              if (zipEntry.dir) return;
-              const filename = relativePath.split("/").pop() || relativePath;
+              zip.forEach((relativePath, zipEntry) => {
+                if (zipEntry.dir) return;
+                const filename = relativePath.split("/").pop() || relativePath;
 
-              if (filename.startsWith("Streaming_History_Audio_") && filename.endsWith(".json")) {
-                const p = zipEntry.async("string").then((content) => {
-                  processJsonContent(content, filename);
-                });
-                zipFilePromises.push(p);
-              } else {
-                ignoredCount++;
-              }
+                if (filename.startsWith("Streaming_History_Audio_") && filename.endsWith(".json")) {
+                  const p = zipEntry.async("string").then((content) => {
+                    processJsonContent(content, filename);
+                  });
+                  zipFilePromises.push(p);
+                } else {
+                  ignoredCount++;
+                }
+              });
+
+              return Promise.all(zipFilePromises);
+            })
+            .then(() => resolve())
+            .catch((err) => {
+              console.error(`Error reading zip file ${file.name}:`, err);
+              reject(err);
             });
-
-            await Promise.all(zipFilePromises);
-            resolve();
-          } catch (err) {
-            console.error(`Error reading zip file ${file.name}:`, err);
-            reject(err);
-          }
         });
         readers.push(zipPromise);
       } else if (file.name.startsWith("Streaming_History_Audio_") && file.name.endsWith(".json")) {
