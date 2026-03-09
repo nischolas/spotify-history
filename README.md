@@ -28,12 +28,16 @@ A privacy-first web application that lets you import your Spotify Extended Strea
 
 ## Ideas / Todos
 
-- Add all featurs to landingpage and readme
+- Add all features to landingpage and readme
+- More performant data handling
+  - Strip unnecessary keys
+  - Pre-aggregate
+  - Loading strategy (current can break weaker devices with large datasets)
+- Let users try the app with sample/dummy data
 - Drag full date range slider, not just the handles
 - Make artists in all views click- and browsable
 - Transition to data view when loaded
-- Sheets on mobile instead of modals?
-- ✗ ~Add a table as playlist in Spotify~ (will need a backend for auth, won't do)
+- ✗ ~Add a table as playlist in Spotify~ (won't do, will need a backend for auth)
 - ✓ ~Click on artist / search artists to show top tracks by artist~
 - ✓ ~Service worker for full offline functionality~
 - ✓ ~Single track statistics from preview player drawer~
