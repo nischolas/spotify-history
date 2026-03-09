@@ -1,6 +1,7 @@
-@use '../variables' as *;
+@use "../variables" as *;
 
 .date-range-filter {
+  z-index: 9;
   background-color: $surface-color;
   position: sticky;
   top: 0;
@@ -9,7 +10,7 @@
   padding: 1.2rem;
 
   @media (max-width: 1024px) {
-    padding: .8rem;
+    padding: 0.8rem;
   }
 
   &.is-stuck {
@@ -69,7 +70,9 @@
     height: 2px;
     background-color: $primary-color;
     border-radius: 3px;
-    transition: left 0.1s ease, width 0.1s ease;
+    transition:
+      left 0.1s ease,
+      width 0.1s ease;
   }
 
   .range-handle {
@@ -82,7 +85,9 @@
     border: 3px solid $surface-color;
     border-radius: 5px;
     cursor: grab;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transition:
+      transform 0.2s ease,
+      box-shadow 0.2s ease;
     z-index: 2;
 
     &:hover {
