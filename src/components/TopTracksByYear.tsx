@@ -105,61 +105,61 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
           )}
         </div>
         <div className="table-scroll-wrapper" ref={scrollWrapperRef} style={!isModal && maxHeight ? { maxHeight } : undefined}>
-        <table>
-          <thead>
-            <tr>
-              <th>{groupBy === "year" ? t("topTracksByYear.headerYear") : t("topTracksByYear.headerMonth")}</th>
-              <th>{t("table.headerTitle")}</th>
-              <th>{t("table.headerArtist")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {topTracks.map(({ groupKey, track }, index) => {
-              // Logic for Year Header in Month View
-              let showYearHeader = false;
-              let currentYear = "";
+          <table>
+            <thead>
+              <tr>
+                <th>{groupBy === "year" ? t("topTracksByYear.headerYear") : t("topTracksByYear.headerMonth")}</th>
+                <th>{t("table.headerTitle")}</th>
+                <th>{t("table.headerArtist")}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {topTracks.map(({ groupKey, track }, index) => {
+                // Logic for Year Header in Month View
+                let showYearHeader = false;
+                let currentYear = "";
 
-              if (groupBy === "month") {
-                const [y] = groupKey.split("-");
-                currentYear = y;
-                const prevKey = index > 0 ? topTracks[index - 1].groupKey : null;
-                const prevYear = prevKey ? prevKey.split("-")[0] : null;
+                if (groupBy === "month") {
+                  const [y] = groupKey.split("-");
+                  currentYear = y;
+                  const prevKey = index > 0 ? topTracks[index - 1].groupKey : null;
+                  const prevYear = prevKey ? prevKey.split("-")[0] : null;
 
-                if (currentYear !== prevYear) {
-                  showYearHeader = true;
+                  if (currentYear !== prevYear) {
+                    showYearHeader = true;
+                  }
                 }
-              }
 
-              return (
-                <React.Fragment key={groupKey}>
-                  {showYearHeader && (
-                    <tr className="year-header" style={{ fontWeight: "bold" }}>
-                      <td colSpan={3} style={{ padding: "0.8rem 0.5rem" }}>
-                        {currentYear}
+                return (
+                  <React.Fragment key={groupKey}>
+                    {showYearHeader && (
+                      <tr className="year-header" style={{ fontWeight: "bold" }}>
+                        <td colSpan={3} style={{ padding: "0.8rem 0.5rem" }}>
+                          {currentYear}
+                        </td>
+                      </tr>
+                    )}
+                    <tr
+                      onClick={() =>
+                        track.spotify_track_uri &&
+                        openPlayer(track.spotify_track_uri, track.master_metadata_track_name || "", track.master_metadata_album_artist_name || "")
+                      }
+                      style={{ cursor: "pointer" }}
+                      title={t("table.statsAndPreview")}
+                    >
+                      <td>
+                        {groupBy === "year"
+                          ? groupKey
+                          : new Date(Number(groupKey.split("-")[0]), Number(groupKey.split("-")[1]) - 1).toLocaleDateString(i18n.language, { month: "short" })}
                       </td>
+                      <td>{track.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
+                      <td>{track.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
                     </tr>
-                  )}
-                  <tr
-                    onClick={() =>
-                      track.spotify_track_uri &&
-                      openPlayer(track.spotify_track_uri, track.master_metadata_track_name || "", track.master_metadata_album_artist_name || "")
-                    }
-                    style={{ cursor: "pointer" }}
-                    title={t("table.statsAndPreview")}
-                  >
-                    <td>
-                      {groupBy === "year"
-                        ? groupKey
-                        : new Date(Number(groupKey.split("-")[0]), Number(groupKey.split("-")[1]) - 1).toLocaleDateString(i18n.language, { month: "short" })}
-                    </td>
-                    <td>{track.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
-                    <td>{track.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
-                  </tr>
-                </React.Fragment>
-              );
-            })}
-          </tbody>
-        </table>
+                  </React.Fragment>
+                );
+              })}
+            </tbody>
+          </table>
         </div>
       </div>
 

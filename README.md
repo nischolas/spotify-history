@@ -28,11 +28,11 @@ A privacy-first web application that lets you import your Spotify Extended Strea
 
 ## Ideas / Todos
 
-- Transition to data view when loaded
 - Add all features to landingpage and readme
 - Let users try the app with sample/dummy data
 - Drag full date range slider, not just the handles
 - Make artists in all views click- and browsable
+- ✓ ~Transition to data view when loaded~
 - ✓ ~More performant data handling~
   - ~Strip unnecessary keys~
   - ~Pre-aggregate~

@@ -51,6 +51,7 @@
     transition: color 0.2s;
     padding: 1rem;
     padding-bottom: 1.3rem;
+    z-index: 9;
 
     @media (max-width: 1024px) {
       top: 0.45rem;
