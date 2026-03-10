@@ -26,4 +26,5 @@ export interface SpotifyHistoryItem {
   reason_end?: string;
   shuffle?: boolean;
   platform?: string;
+  allUris?: string[];
 }
