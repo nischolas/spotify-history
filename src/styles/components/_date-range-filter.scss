@@ -5,9 +5,11 @@
   background-color: $surface-color;
   position: sticky;
   top: 0;
-  border-radius: 1rem;
   corner-shape: squircle;
   padding: 1.2rem;
+  border-radius: 0.7rem;
+
+  transition: all 600ms ease-in-out;
 
   @media (max-width: 1024px) {
     padding: 0.8rem;
@@ -16,7 +18,8 @@
   &.is-stuck {
     border-top-left-radius: 0;
     border-top-right-radius: 0;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.7);
+    background-color: $surface-color-light;
   }
 
   .title {

@@ -66,6 +66,10 @@
   grid-template-columns: repeat(12, 1fr);
   gap: 1rem;
 
+  @media (max-width: 430px) {
+    gap: 0.7rem;
+  }
+
   .table-container {
     grid-column: span 12;
 
@@ -113,6 +117,10 @@
   corner-shape: squircle;
   overflow: hidden;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 430px) {
+    border-radius: 0.7rem;
+  }
 
   @media (max-width: 1024px) {
     overflow-x: auto;

@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use "../variables" as *;
 
 .track-insights {
   display: flex;
@@ -8,8 +8,7 @@
 }
 
 .insight-panel {
-  background-color: $bg-color;
-  border: 1px solid $border-color;
+  background-color: $surface-color;
   border-radius: 0.6rem;
   overflow: hidden;
 }
@@ -47,7 +46,7 @@
 }
 
 .insight-panel-body {
-  padding: 0 0.9rem 0.9rem;
+  padding: 0 0.9rem 0;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -60,18 +59,22 @@
 }
 
 .kpi-card {
-  background-color: $surface-color;
-  border: 1px solid $border-color;
+  background-color: $surface-color-light;
   border-radius: 0.5rem;
   padding: 0.5rem 0.75rem;
   min-width: 80px;
   flex: 1 1 80px;
+
+  @media (max-width: 430px) {
+    padding: 0.4rem 0rem;
+  }
 
   .kpi-value {
     font-size: 1rem;
     font-weight: 700;
     color: $text-primary;
     white-space: nowrap;
+    text-align: center;
   }
 
   .kpi-label {
@@ -79,6 +82,7 @@
     color: $text-secondary;
     margin-top: 0.15rem;
     white-space: nowrap;
+    text-align: center;
   }
 }
 
