@@ -122,12 +122,31 @@ export function computeLifetimeCurve(entries: SpotifyHistoryItem[]): LifetimeCur
   }
 
   let cumMs = 0;
-  const curve = Array.from(monthMs.entries())
+  const sparseCurve = Array.from(monthMs.entries())
     .sort((a, b) => a[0].localeCompare(b[0]))
     .map(([date, ms]) => {
       cumMs += ms;
       return { date, cumulativeHours: cumMs / 3_600_000, monthlyPlays: monthPlays.get(date) ?? 0 };
     });
+
+  // Fill in months with no plays so the chart shows a continuous timeline
+  const curve: typeof sparseCurve = [];
+  const sparseMap = new Map(sparseCurve.map(p => [p.date, p]));
+  const [startY, startM] = sparseCurve[0].date.split("-").map(Number);
+  const [endY, endM] = sparseCurve[sparseCurve.length - 1].date.split("-").map(Number);
+  let prevCumHours = 0;
+  let y = startY, m = startM;
+  while (y < endY || (y === endY && m <= endM)) {
+    const key = `${y}-${String(m).padStart(2, "0")}`;
+    if (sparseMap.has(key)) {
+      prevCumHours = sparseMap.get(key)!.cumulativeHours;
+      curve.push(sparseMap.get(key)!);
+    } else {
+      curve.push({ date: key, cumulativeHours: prevCumHours, monthlyPlays: 0 });
+    }
+    m++;
+    if (m > 12) { m = 1; y++; }
+  }
 
   const totalHours = cumMs / 3_600_000;
   const findMilestone = (frac: number) => {

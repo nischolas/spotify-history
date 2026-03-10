@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ComposedChart, Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, ReferenceLine } from "recharts";
+import { ComposedChart, Line, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import type { LifetimeCurve } from "@/utils/trackAnalytics";
 import { isMobile } from "@/utils/isMobile";
 
@@ -18,7 +18,7 @@ export const LifetimeCurvePanel: React.FC<Props> = ({ data, totalPlays, skipRate
   const { t, i18n } = useTranslation();
   const [open, setOpen] = useState(!isMobile);
 
-  const { curve, milestones, firstPlay, lastPlay, peakYear, totalHours } = data;
+  const { curve, firstPlay, lastPlay, peakYear, totalHours } = data;
 
   if (curve.length === 0) return null;
 
@@ -27,6 +27,11 @@ export const LifetimeCurvePanel: React.FC<Props> = ({ data, totalPlays, skipRate
 
   // Thin out the curve for performance if very long
   const displayCurve = curve.length > 200 ? curve.filter((_, i) => i % Math.ceil(curve.length / 200) === 0 || i === curve.length - 1) : curve;
+
+  // One tick per year (first month of each year that appears in the data)
+  const yearTicks = [...new Set(displayCurve.map((p) => p.date.slice(0, 4)))].map(
+    (yr) => displayCurve.find((p) => p.date.startsWith(yr))!.date
+  );
 
   return (
     <div className="insight-panel">
@@ -72,16 +77,9 @@ export const LifetimeCurvePanel: React.FC<Props> = ({ data, totalPlays, skipRate
           </div>
 
           <div className="chart-block">
-            <ResponsiveContainer width="100%" height={160}>
+            <ResponsiveContainer width="100%" height={100}>
               <ComposedChart data={displayCurve} margin={{ top: 8, right: -24, left: -16, bottom: 0 }}>
-                <XAxis
-                  dataKey="date"
-                  tick={{ fill: TEXT_SECONDARY, fontSize: 10 }}
-                  axisLine={false}
-                  tickLine={false}
-                  interval="preserveStartEnd"
-                  tickFormatter={(v) => v.slice(0, 7)}
-                />
+                <XAxis dataKey="date" tick={{ fill: TEXT_SECONDARY, fontSize: 10 }} axisLine={{ stroke: BORDER }} tickLine={false} ticks={yearTicks} tickFormatter={(v) => v.slice(0, 4)} />
                 <YAxis yAxisId="hours" tick={{ fill: TEXT_SECONDARY, fontSize: 11 }} axisLine={false} tickLine={false} tickFormatter={fmtHours} />
                 <YAxis yAxisId="plays" orientation="right" tick={{ fill: TEXT_SECONDARY, fontSize: 11 }} axisLine={false} tickLine={false} />
                 <Tooltip
@@ -89,37 +87,11 @@ export const LifetimeCurvePanel: React.FC<Props> = ({ data, totalPlays, skipRate
                     if (name === "cumulativeHours") return [fmtHours(typeof v === "number" ? v : 0), t("trackInsights.lifetime.cumulativeHours")];
                     return [v, t("trackInsights.lifetime.playsPerMonth")];
                   }}
+                  labelFormatter={(label) => new Date(`${label}-01`).toLocaleDateString(i18n.language, { year: "numeric", month: "short" })}
                   contentStyle={{ background: "#1e1e1e", border: `1px solid ${BORDER}`, borderRadius: 6, fontSize: 12 }}
                   labelStyle={{ color: TEXT_SECONDARY }}
                 />
-                {milestones.p25 && (
-                  <ReferenceLine
-                    yAxisId="hours"
-                    x={milestones.p25}
-                    stroke="#535353"
-                    strokeDasharray="3 3"
-                    label={{ value: "25%", fill: TEXT_SECONDARY, fontSize: 10 }}
-                  />
-                )}
-                {milestones.p50 && (
-                  <ReferenceLine
-                    yAxisId="hours"
-                    x={milestones.p50}
-                    stroke="#888"
-                    strokeDasharray="3 3"
-                    label={{ value: "50%", fill: TEXT_SECONDARY, fontSize: 10 }}
-                  />
-                )}
-                {milestones.p75 && (
-                  <ReferenceLine
-                    yAxisId="hours"
-                    x={milestones.p75}
-                    stroke="#aaa"
-                    strokeDasharray="3 3"
-                    label={{ value: "75%", fill: TEXT_SECONDARY, fontSize: 10 }}
-                  />
-                )}
-                <Bar yAxisId="plays" dataKey="monthlyPlays" fill="#148e3fff" opacity={0.35} isAnimationActive={false} />
+<Bar yAxisId="plays" dataKey="monthlyPlays" fill="#148e3fff" opacity={0.35} isAnimationActive={false} />
                 <Line
                   yAxisId="hours"
                   type="monotone"
