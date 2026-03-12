@@ -11,7 +11,8 @@
 
   transition:
     background-color 1s ease-in-out,
-    box-shadow 200ms ease-in-out;
+    box-shadow 200ms ease-in-out,
+    border-radius 200ms ease-in-out;
 
   @media (max-width: 1024px) {
     padding: 0.8rem;
