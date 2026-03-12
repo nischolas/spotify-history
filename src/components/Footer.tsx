@@ -14,7 +14,26 @@ export const Footer: React.FC = () => {
   return (
     <>
       <footer className="app-footer">
-        <div className="footer-content">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <h3 className="footer-brand-title">{t("app.title")}</h3>
+            <p className="footer-not-affiliated">
+              {t("footer.notAffiliated")} {t("footer.by")}{" "}
+              <a href="https://nicholas-mathi.eu" target="_blank" rel="noopener noreferrer">
+                Nicholas Mathieu
+              </a>
+            </p>
+            <div className="footer-links">
+              <a href="https://nicholas-mathi.eu/impressum" target="_blank" rel="noopener noreferrer">
+                {t("footer.legal")}
+              </a>
+              <a onClick={() => setShowMoreModal(true)}>{t("privacy.title")}</a>
+              <a href="https://github.com/nischolas/antigravity-spotify" target="_blank" rel="noopener noreferrer">
+                Source
+              </a>
+            </div>
+          </div>
+
           <div className="language-selector">
             <button className={`lang-btn ${i18n.language === "en" ? "active" : ""}`} onClick={() => changeLanguage("en")} aria-label="Switch to English">
               🇬🇧 English
@@ -23,29 +42,10 @@ export const Footer: React.FC = () => {
               🇩🇪 Deutsch
             </button>
           </div>
+        </div>
 
+        <div className="footer-bottom">
           <p>{t("footer.privacy")}</p>
-
-          <div style={{ textAlign: "center" }}>
-            <span>{t("footer.by")}</span>{" "}
-            <a href="https://nicholas-mathi.eu" target="_blank" rel="noopener noreferrer">
-              Nicholas Mathieu
-            </a>
-            <br />
-            <a href="https://nicholas-mathi.eu/impressum" target="_blank" rel="noopener noreferrer">
-              {t("footer.legal")}
-            </a>
-            &nbsp;/&nbsp;
-            <a onClick={() => setShowMoreModal(true)} target="_blank" rel="noopener noreferrer">
-              {t("privacy.title")}
-            </a>
-            &nbsp;/&nbsp;
-            <a href="https://github.com/nischolas/antigravity-spotify" target="_blank" rel="noopener noreferrer">
-              Source
-            </a>
-            <br />
-            <p>{t("footer.notAffiliated")}</p>
-          </div>
         </div>
       </footer>
       <Modal isOpen={showMoreModal} onClose={() => setShowMoreModal(false)}>
