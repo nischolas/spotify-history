@@ -41,6 +41,12 @@ export const PrivacyText: React.FC = () => {
 
       <hr />
 
+      <h3>{t("privacy.umami.title")}</h3>
+      <p>{t("privacy.umami.description")}</p>
+      <p>{t("privacy.umami.legalBasis")}</p>
+
+      <hr />
+
       <h3>{t("privacy.rights.title")}</h3>
       <p>{t("privacy.rights.description")}</p>
       <p>{t("privacy.rights.complaint")}</p>
