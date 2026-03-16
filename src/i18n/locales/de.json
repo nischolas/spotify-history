@@ -196,8 +196,14 @@
       "thirdCountry": "Es kann nicht ausgeschlossen werden, dass eine Datenübermittlung in Drittländer (z. B. USA) erfolgt."
     },
 
+    "umami": {
+      "title": "4. Webanalyse",
+      "description": "Diese Website verwendet das datenschutzfreundliche Analyse-Tool Umami, um die Nutzung der Website statistisch auszuwerten. Dabei werden keine Cookies eingesetzt und es werden keine personenbezogenen Daten dauerhaft gespeichert. Die Analyse erfolgt ausschließlich anonymisiert und dient dazu, die Inhalte und Benutzerfreundlichkeit der Website zu verbessern.",
+      "legalBasis": "Rechtsgrundlage: Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse an der statistischen Auswertung der Nutzung dieser Website)."
+    },
+
     "rights": {
-      "title": "4. Rechte der betroffenen Personen",
+      "title": "5. Rechte der betroffenen Personen",
       "description": "Nutzer haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit gemäß Art. 15–20 DSGVO.",
       "complaint": "Zudem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde."
     }

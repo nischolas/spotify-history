@@ -196,6 +196,12 @@
       "thirdCountry": "It cannot be ruled out that data may be transferred to third countries (e.g., the United States)."
     },
 
+    "umami": {
+      "title": "4. Web Analytics",
+      "description": "This website uses the privacy-friendly analytics tool Umami to statistically analyze the use of the website. No cookies are used and no personal data is stored permanently. The analysis is carried out exclusively in anonymized form and serves solely to improve the content and usability of the website.",
+      "legalBasis": "Legal basis: Article 6(1)(f) GDPR (legitimate interest in the statistical analysis of the use of this website)."
+    },
+
     "rights": {
       "title": "4. Data Subject Rights",
       "description": "Users have the right to access, rectification, erasure, restriction of processing, and data portability in accordance with Articles 15–20 GDPR.",
