@@ -2,7 +2,7 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import { VitePWA } from "vite-plugin-pwa";
 import { fileURLToPath } from "node:url";
-import { inlineUmamiPlugin } from "./plugins/inline-umami";
+import { vitePluginUmami } from "@nischolas/vite-plugin-umami-inline";
 
 export default defineConfig({
   resolve: {
@@ -12,8 +12,8 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    inlineUmamiPlugin({
-      hostUrl: "https://umami.nicholas-mathi.eu",
+    vitePluginUmami({
+      scriptUrl: "https://umami.nicholas-mathi.eu/script.js",
       websiteId: "b9e87674-b6ce-4b71-8728-d53ebdaff2d3",
     }),
     VitePWA({
