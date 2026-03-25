@@ -137,6 +137,7 @@ export const useSpotifyStore = create<SpotifyStore>()(
             set({ rawData: storedRaw, filteredRawData: filteredRaw, isDataLoaded: true, isDataLoadedInIDB: false });
             const aggregated = await aggregateInWorker(storedRaw);
             set({ aggregatedData: aggregated });
+            window.umami?.track("Restored data");
           } else {
             set({ isDataLoaded: false, isDataLoadedInIDB: false });
           }

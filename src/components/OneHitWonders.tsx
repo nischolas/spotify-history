@@ -60,7 +60,13 @@ export const OneHitWonders: React.FC<OneHitWondersProps> = ({ limit = 10, isModa
             <p>{t("oneHitWonders.subtitle")}</p>
           </div>
           {!isModal && (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in OneHitWonders");
+                setShowMoreModal(true);
+              }}
+            >
               {t("common.showMore", "Show More")}
             </button>
           )}

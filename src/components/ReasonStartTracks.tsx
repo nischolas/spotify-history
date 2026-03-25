@@ -56,7 +56,13 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
             <p>{subtitle}</p>
           </div>
           {!isModal && (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in ReasonStartTracks");
+                setShowMoreModal(true);
+              }}
+            >
               {t("common.showMore", "Show More")}
             </button>
           )}

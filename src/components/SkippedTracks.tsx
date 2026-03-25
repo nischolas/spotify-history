@@ -63,7 +63,13 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
             <p>{t("skippedTracks.subtitle", { seconds: CUTOFF / 1000 })}</p>
           </div>
           {!isModal && (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in SkippedTracks");
+                setShowMoreModal(true);
+              }}
+            >
               {t("common.showMore", "Show More")}
             </button>
           )}

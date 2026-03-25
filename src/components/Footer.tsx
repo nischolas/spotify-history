@@ -27,7 +27,14 @@ export const Footer: React.FC = () => {
               <a href="https://nicholas-mathi.eu/impressum" target="_blank" rel="noopener noreferrer">
                 {t("footer.legal")}
               </a>
-              <a onClick={() => setShowMoreModal(true)}>{t("privacy.title")}</a>
+              <a
+                onClick={() => {
+                  window.umami?.track("Open Modal in Footer");
+                  setShowMoreModal(true);
+                }}
+              >
+                {t("privacy.title")}
+              </a>
               <a href="https://github.com/nischolas/antigravity-spotify" target="_blank" rel="noopener noreferrer">
                 Source
               </a>

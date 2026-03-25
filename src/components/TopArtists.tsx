@@ -50,7 +50,13 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
           {isModal ? (
             <input type="search" placeholder={t("topArtists.search")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           ) : (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in topArtists");
+                setShowMoreModal(true);
+              }}
+            >
               {t("topArtists.searchBtn")}
             </button>
           )}

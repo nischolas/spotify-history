@@ -66,7 +66,13 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
             )}
           </div>
           {!isModal && (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in topTracks");
+                setShowMoreModal(true);
+              }}
+            >
               {t("common.showMore")}
             </button>
           )}
