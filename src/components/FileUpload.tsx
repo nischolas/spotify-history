@@ -12,6 +12,8 @@ export const FileUpload: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    window.umami?.track("Clicked in fileImport button");
+
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
@@ -103,9 +105,11 @@ export const FileUpload: React.FC = () => {
         return;
       }
 
+      window.umami?.track("Imported valid data");
       loadData(allData);
     } catch (err) {
       setError(t("fileImport.errorProcessing"));
+      window.umami?.track("Imported invalid data");
       console.error(err);
     } finally {
       setIsLoading(false);

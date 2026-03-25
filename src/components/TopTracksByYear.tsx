@@ -99,7 +99,13 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
             <p>{groupBy === "year" ? t("topTracksByYear.subtitle") : t("topTracksByYear.subtitleMonth")}</p>
           </div>
           {!isModal && groupBy === "year" && (
-            <button className="reset-btn" onClick={() => setShowMonthlyModal(true)}>
+            <button
+              className="reset-btn"
+              onClick={() => {
+                window.umami?.track("Open Modal in topTracksByYear");
+                setShowMonthlyModal(true);
+              }}
+            >
               {t("topTracksByYear.showByMonth")}
             </button>
           )}

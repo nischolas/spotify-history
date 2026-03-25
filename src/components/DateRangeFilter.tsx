@@ -148,6 +148,7 @@ export const DateRangeFilter: React.FC = () => {
     };
 
     const handleEnd = () => {
+      window.umami?.track("Interacted with slider");
       setIsDragging(null);
     };
 
