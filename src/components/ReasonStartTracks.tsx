@@ -57,7 +57,6 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
             <p>{subtitle}</p>
           </div>
           {!isModal && (
-<<<<<<< HEAD
             <button
               className="reset-btn"
               onClick={() => {
@@ -65,11 +64,7 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
                 setShowMoreModal(true);
               }}
             >
-              {t("common.showMore", "Show More")}
-=======
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
               <RiMenuFill /> {t("common.showMore", "Show More")}
->>>>>>> main
             </button>
           )}
         </div>

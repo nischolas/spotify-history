@@ -100,7 +100,6 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
             <p>{groupBy === "year" ? t("topTracksByYear.subtitle") : t("topTracksByYear.subtitleMonth")}</p>
           </div>
           {!isModal && groupBy === "year" && (
-<<<<<<< HEAD
             <button
               className="reset-btn"
               onClick={() => {
@@ -108,11 +107,7 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
                 setShowMonthlyModal(true);
               }}
             >
-              {t("topTracksByYear.showByMonth")}
-=======
-            <button className="reset-btn" onClick={() => setShowMonthlyModal(true)}>
               <RiMenuFill /> {t("topTracksByYear.showByMonth")}
->>>>>>> main
             </button>
           )}
         </div>

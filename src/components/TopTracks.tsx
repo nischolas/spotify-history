@@ -67,7 +67,6 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
             )}
           </div>
           {!isModal && (
-<<<<<<< HEAD
             <button
               className="reset-btn"
               onClick={() => {
@@ -75,11 +74,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
                 setShowMoreModal(true);
               }}
             >
-              {t("common.showMore")}
-=======
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
               <RiMenuFill /> {t("common.showMore")}
->>>>>>> main
             </button>
           )}
         </div>

@@ -64,7 +64,6 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
             <p>{t("skippedTracks.subtitle", { seconds: CUTOFF / 1000 })}</p>
           </div>
           {!isModal && (
-<<<<<<< HEAD
             <button
               className="reset-btn"
               onClick={() => {
@@ -72,11 +71,7 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
                 setShowMoreModal(true);
               }}
             >
-              {t("common.showMore", "Show More")}
-=======
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
               <RiMenuFill /> {t("common.showMore", "Show More")}
->>>>>>> main
             </button>
           )}
         </div>
