@@ -11,6 +11,7 @@ import { Footer } from "@/components/Footer";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 import { useTranslation } from "react-i18next";
 import { GeneralStats } from "@/components/GeneralStats";
+import { PlatformStats } from "@/components/PlatformStats";
 import { OneHitWonders } from "@/components/OneHitWonders";
 import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
@@ -72,6 +73,7 @@ function App() {
             </div>
             <div className="sections">
               <GeneralStats />
+              <PlatformStats />
               <DateRangeFilter />
               <TopTracks />
               <TopTracksByYear />

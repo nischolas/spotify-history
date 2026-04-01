@@ -201,5 +201,9 @@
       "description": "Nutzer haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit gemäß Art. 15–20 DSGVO.",
       "complaint": "Zudem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde."
     }
+  },
+  "platformStats": {
+    "title": "Abspielplattformen",
+    "unknown": "Unbekannt"
   }
 }
