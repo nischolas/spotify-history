@@ -204,6 +204,12 @@
   },
   "platformStats": {
     "title": "Abspielplattformen",
-    "unknown": "Unbekannt"
+    "ios": "iOS",
+    "android": "Android",
+    "mac": "Mac",
+    "windows": "Windows",
+    "webPlayer": "Web Player",
+    "tv": "TV",
+    "other": "Sonstiges"
   }
 }

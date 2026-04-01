@@ -2,26 +2,49 @@ import { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 
-const COLORS = ["#1db954", "#1ed760", "#535353", "#b3b3b3", "#e22134", "#f59b23", "#509bf5", "#c685c6", "#f037a5", "#74b43b"];
+type PlatformBucket = "ios" | "android" | "mac" | "windows" | "webPlayer" | "tv" | "other";
+
+const BUCKET_COLORS: Record<PlatformBucket, string> = {
+  ios: "#509bf5",
+  android: "#74b43b",
+  mac: "#b3b3b3",
+  windows: "#1db954",
+  webPlayer: "#f59b23",
+  tv: "#c685c6",
+  other: "#535353",
+};
+
+function normalizePlatform(raw: string | undefined | null): PlatformBucket {
+  if (!raw) return "other";
+  const s = raw.toLowerCase();
+  if (s.includes("ios") || s.includes("iphone") || s.includes("applewatch")) return "ios";
+  if (s.includes("android")) return "android";
+  if (s.includes("osx") || s.includes("os x") || s.includes("macos")) return "mac";
+  if (s.includes("windows")) return "windows";
+  if (s.includes("web_player") || s.includes("webplayer")) return "webPlayer";
+  if (s.includes("cast_tv") || s.includes("webos_tv") || s.includes("chromecast")) return "tv";
+  return "other";
+}
 
 export const PlatformStats = () => {
   const { filteredRawData } = useSpotifyStore();
   const { t } = useTranslation();
 
   const segments = useMemo(() => {
-    const counts = new Map<string, number>();
+    const counts = new Map<PlatformBucket, number>();
     for (const item of filteredRawData) {
-      const key = item.platform ?? t("platformStats.unknown");
-      counts.set(key, (counts.get(key) ?? 0) + 1);
+      const bucket = normalizePlatform(item.platform);
+      counts.set(bucket, (counts.get(bucket) ?? 0) + 1);
     }
     const total = filteredRawData.length;
     return Array.from(counts.entries())
       .sort((a, b) => b[1] - a[1])
-      .map(([platform, count], i) => ({
-        platform,
+      .map(([bucket, count]) => ({
+        bucket,
+        label: t(`platformStats.${bucket}`),
         count,
         pct: total > 0 ? (count / total) * 100 : 0,
-        color: COLORS[i % COLORS.length],
+        color: BUCKET_COLORS[bucket],
       }));
   }, [filteredRawData, t]);
 
@@ -31,20 +54,20 @@ export const PlatformStats = () => {
     <div className="platform-stats section">
       <h2>{t("platformStats.title")}</h2>
       <div className="platform-bar">
-        {segments.map(({ platform, pct, color }) => (
+        {segments.map(({ bucket, label, pct, color }) => (
           <div
-            key={platform}
+            key={bucket}
             className="platform-bar-segment"
             style={{ width: `${pct}%`, backgroundColor: color }}
-            title={`${platform}: ${pct.toFixed(1)}%`}
+            title={`${label}: ${pct.toFixed(1)}%`}
           />
         ))}
       </div>
       <div className="platform-legend">
-        {segments.map(({ platform, pct, color }) => (
-          <div key={platform} className="platform-legend-item">
+        {segments.map(({ bucket, label, pct, color }) => (
+          <div key={bucket} className="platform-legend-item">
             <span className="platform-legend-dot" style={{ backgroundColor: color }} />
-            <span className="platform-legend-label">{platform}</span>
+            <span className="platform-legend-label">{label}</span>
             <span className="platform-legend-pct">{pct.toFixed(1)}%</span>
           </div>
         ))}

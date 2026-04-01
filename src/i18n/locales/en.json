@@ -204,6 +204,12 @@
   },
   "platformStats": {
     "title": "Listening Platforms",
-    "unknown": "Unknown"
+    "ios": "iOS",
+    "android": "Android",
+    "mac": "Mac",
+    "windows": "Windows",
+    "webPlayer": "Web Player",
+    "tv": "TV",
+    "other": "Other"
   }
 }
