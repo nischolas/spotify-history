@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use "../variables" as *;
 
 .reset-btn,
 .filter-btn {
@@ -9,6 +9,9 @@
   border-radius: 0.5rem;
   cursor: pointer;
   transition: all 0.2s ease;
+  display: flex;
+  gap: 0.3em;
+  align-items: center;
 
   &:hover {
     color: $text-primary;

@@ -5,6 +5,7 @@ import { usePreviewPlayer } from "@/hooks/usePreviewPlayer";
 import { useTranslation } from "react-i18next";
 import { Modal } from "@/components/Modal";
 import type { SpotifyHistoryItem } from "@/types";
+import { RiMenuFill } from "react-icons/ri";
 
 interface OneHitWondersProps {
   limit?: number;
@@ -60,6 +61,7 @@ export const OneHitWonders: React.FC<OneHitWondersProps> = ({ limit = 10, isModa
             <p>{t("oneHitWonders.subtitle")}</p>
           </div>
           {!isModal && (
+<<<<<<< HEAD
             <button
               className="reset-btn"
               onClick={() => {
@@ -68,6 +70,10 @@ export const OneHitWonders: React.FC<OneHitWondersProps> = ({ limit = 10, isModa
               }}
             >
               {t("common.showMore", "Show More")}
+=======
+            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+              <RiMenuFill /> {t("common.showMore", "Show More")}
+>>>>>>> main
             </button>
           )}
         </div>

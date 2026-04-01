@@ -14,6 +14,7 @@ import { GeneralStats } from "@/components/GeneralStats";
 import { OneHitWonders } from "@/components/OneHitWonders";
 import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
+import { HiArrowsRightLeft } from "react-icons/hi2";
 
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
@@ -66,7 +67,7 @@ function App() {
             <div className="actions">
               <h1>{t("app.title")}</h1>
               <button onClick={reset} className="reset-btn">
-                {t("app.importDifferent")}
+                <HiArrowsRightLeft /> {t("app.importDifferent")}
               </button>
             </div>
             <div className="sections">
