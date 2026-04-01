@@ -4,6 +4,8 @@ import { formatMsPlain } from "@/utils/formatTime";
 import { useTranslation } from "react-i18next";
 import { Modal } from "@/components/Modal";
 import { TopTracks } from "@/components/TopTracks";
+import { RiMenuSearchLine } from "react-icons/ri";
+import { HiSearch } from "react-icons/hi";
 
 interface TopArtistsProps {
   limit?: number;
@@ -51,7 +53,7 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
             <input type="search" placeholder={t("topArtists.search")} value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
           ) : (
             <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
-              {t("topArtists.searchBtn")}
+              <HiSearch /> {t("topArtists.searchBtn")}
             </button>
           )}
         </div>

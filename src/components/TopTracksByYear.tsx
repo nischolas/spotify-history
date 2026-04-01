@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { SpotifyHistoryItem } from "@/types";
 import { Modal } from "@/components/Modal";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer";
+import { RiMenuFill } from "react-icons/ri";
 
 interface TopTracksByYearProps {
   groupBy?: "year" | "month";
@@ -100,7 +101,7 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
           </div>
           {!isModal && groupBy === "year" && (
             <button className="reset-btn" onClick={() => setShowMonthlyModal(true)}>
-              {t("topTracksByYear.showByMonth")}
+              <RiMenuFill /> {t("topTracksByYear.showByMonth")}
             </button>
           )}
         </div>

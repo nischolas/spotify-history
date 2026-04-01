@@ -3,6 +3,7 @@ import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Modal } from "@/components/Modal";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer";
+import { RiMenuFill } from "react-icons/ri";
 
 interface SkippedTracksProps {
   limit?: number;
@@ -64,7 +65,7 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
           </div>
           {!isModal && (
             <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
-              {t("common.showMore", "Show More")}
+              <RiMenuFill /> {t("common.showMore", "Show More")}
             </button>
           )}
         </div>

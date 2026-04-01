@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import type { SpotifyHistoryItem, ReasonStartType } from "@/types";
 import { Modal } from "@/components/Modal";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer";
+import { RiMenuFill } from "react-icons/ri";
 
 interface ReasonStartTracksProps {
   reason_start: ReasonStartType;
@@ -57,7 +58,7 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
           </div>
           {!isModal && (
             <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
-              {t("common.showMore", "Show More")}
+              <RiMenuFill /> {t("common.showMore", "Show More")}
             </button>
           )}
         </div>

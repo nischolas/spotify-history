@@ -4,6 +4,7 @@ import { formatMsPlain } from "@/utils/formatTime";
 import { useTranslation } from "react-i18next";
 import { Modal } from "@/components/Modal";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer";
+import { RiMenuFill } from "react-icons/ri";
 
 interface TopTracksProps {
   limit?: number;
@@ -67,7 +68,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
           </div>
           {!isModal && (
             <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
-              {t("common.showMore")}
+              <RiMenuFill /> {t("common.showMore")}
             </button>
           )}
         </div>
