@@ -54,7 +54,7 @@ export const OneHitWonders: React.FC<OneHitWondersProps> = ({ limit = 10, isModa
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container one-hit-wonders">
         <div className="header-row">
           <div className="title">
             <h3>{t("oneHitWonders.title")}</h3>

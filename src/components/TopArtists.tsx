@@ -43,7 +43,7 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container top-artists">
         <div className="header-row">
           <div className="title">
             <h3>{t("topArtists.title")}</h3>

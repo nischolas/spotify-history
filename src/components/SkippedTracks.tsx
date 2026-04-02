@@ -57,7 +57,7 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container skipped-tracks">
         <div className="header-row">
           <div className="title">
             <h3>{t("skippedTracks.title")}</h3>

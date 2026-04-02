@@ -45,7 +45,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container top-tracks">
         <div className="header-row">
           <div className="title">
             <h3>{artistFilter ? t("topArtists.tracksBy", { artist: artistFilter }) : t("topTracks.title")}</h3>

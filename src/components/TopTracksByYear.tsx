@@ -93,7 +93,7 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
 
   return (
     <>
-      <div className="table-container">
+      <div className="table-container top-tracks-year">
         <div className="header-row">
           <div className="title">
             <h3>{groupBy === "year" ? t("topTracksByYear.title") : t("topTracksByYear.titleMonth")}</h3>

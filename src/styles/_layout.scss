@@ -68,46 +68,43 @@
 
   @media (max-width: 1024px) {
     gap: 0.7rem;
-  }
 
-  .table-container {
-    grid-column: span 12;
-
-    &:nth-child(1) {
-      grid-column: span 12;
-    }
-
-    &:nth-child(2) {
-      grid-column: span 12;
-    }
-
-    &:nth-child(3) {
-      grid-column: span 6;
-    }
-
-    &:nth-child(4) {
-      grid-column: span 6;
-    }
-
-    &:nth-child(5) {
-      grid-column: span 5;
-    }
-
-    &:nth-child(6) {
-      grid-column: span 7;
-    }
-
-    &:nth-child(7) {
-      grid-column: span 6;
-    }
-
-    &:nth-child(8) {
-      grid-column: span 6;
-    }
-
-    @media (max-width: 1024px) {
+    .table-container {
       grid-column: span 12 !important;
     }
+  }
+
+  .general-stats,
+  .platform-stats,
+  .date-range-filter {
+    grid-column: span 12;
+  }
+
+  .top-tracks {
+    grid-column: span 6;
+  }
+
+  .top-tracks-year {
+    grid-column: span 6;
+  }
+
+  .top-artists {
+    grid-column: span 5;
+  }
+
+  .skipped-tracks {
+    grid-column: span 7;
+  }
+
+  .reason-start-tracks {
+    &-clickrow,
+    &-backbtn {
+      grid-column: span 6;
+    }
+  }
+
+  .one-hit-wonders {
+    grid-column: span 12;
   }
 }
 
