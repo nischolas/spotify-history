@@ -43,10 +43,6 @@ export const Footer: React.FC = () => {
             </button>
           </div>
         </div>
-
-        <div className="footer-bottom">
-          <p>{t("footer.privacy")}</p>
-        </div>
       </footer>
       <Modal isOpen={showMoreModal} onClose={() => setShowMoreModal(false)}>
         <PrivacyText />
