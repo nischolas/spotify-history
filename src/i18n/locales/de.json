@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Erkunde deinen Spotify Streamingverlauf",
-    "subtitle": "Alles bleibt auf deinem Gerät, keine Daten werden an einen Server gesendet.",
+    "subtitle": "Deine Daten bleiben auf deinem Gerät. Die Verabeitung findet lokal in deinem Browser statt.",
     "importDifferent": "Andere Datei importieren"
   },
   "popup": {
@@ -123,7 +123,6 @@
   "footer": {
     "language": "Sprache",
     "legal": "Impressum",
-    "privacy": "Keinerlei Daten über dich oder dein Gerät werden gesammelt oder an einen Server gesendet.",
     "by": "Gebaut von",
     "notAffiliated": "Keine Verbindung zu Spotify."
   },
