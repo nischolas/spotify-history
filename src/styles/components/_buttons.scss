@@ -12,6 +12,7 @@
   display: flex;
   gap: 0.3em;
   align-items: center;
+  white-space: nowrap;
 
   &:hover {
     color: $text-primary;
