@@ -50,7 +50,7 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
 
   return (
     <>
-      <div className="table-container">
+      <div className={`table-container reason-start-tracks reason-start-tracks-${reason_start}`}>
         <div className="header-row">
           <div className="title">
             <h3>{title}</h3>

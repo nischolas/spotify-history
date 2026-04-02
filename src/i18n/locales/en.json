@@ -207,5 +207,15 @@
       "description": "Users have the right to access, rectification, erasure, restriction of processing, and data portability in accordance with Articles 15–20 GDPR.",
       "complaint": "Furthermore, users have the right to lodge a complaint with a supervisory authority."
     }
+  },
+  "platformStats": {
+    "title": "Listening Platforms",
+    "ios": "iOS",
+    "android": "Android",
+    "mac": "Mac",
+    "windows": "Windows",
+    "webPlayer": "Web Player",
+    "tv": "TV",
+    "other": "Other"
   }
 }

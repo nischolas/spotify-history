@@ -1,0 +1,100 @@
+@use "../variables" as *;
+
+.platform-stats {
+  background-color: $surface-color;
+  border-radius: 1rem;
+  corner-shape: squircle;
+  padding: 1.2rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+
+  @media (max-width: 1024px) {
+    padding: 0.8rem;
+    border-radius: 0.7rem;
+  }
+
+  h3 {
+    margin: 0;
+    margin-bottom: 0.8rem;
+  }
+
+  .platform-bar {
+    display: flex;
+    width: 100%;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    gap: 2px;
+    cursor: pointer;
+
+    .platform-bar-segment {
+      box-sizing: border-box;
+      height: 100%;
+      min-width: 2px;
+      transition: opacity 0.2s ease;
+      font-size: 14px;
+      font-weight: bold;
+      color: $text-primary;
+      text-shadow: 0 0 10px rgb(0, 50, 0);
+      padding: 0.3em;
+      padding-left: 0.6em;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+
+      span:nth-child(2) {
+        opacity: 0.8;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .platform-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem 1.2rem;
+    margin-top: 0.8rem;
+
+    .platform-legend-item {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.85rem;
+    }
+
+    .platform-legend-dot {
+      width: 0.6rem;
+      height: 0.6rem;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    .platform-legend-label {
+      color: $text-primary;
+    }
+
+    .platform-legend-pct {
+      color: $text-secondary;
+    }
+  }
+
+  .platform-legend-dot,
+  .platform-bar-segment {
+    &:nth-child(1) {
+      background-color: rgba(29, 185, 84, 0.9);
+    }
+
+    &:nth-child(2) {
+      background-color: rgba(29, 185, 84, 0.7);
+    }
+
+    &:nth-child(3) {
+      background-color: rgba(29, 185, 84, 0.5);
+    }
+
+    &:nth-child(4) {
+      background-color: rgba(29, 185, 84, 0.3);
+    }
+
+    background-color: rgba(29, 185, 84, 0.1);
+  }
+}
