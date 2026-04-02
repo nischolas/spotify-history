@@ -1,7 +1,6 @@
 @use "../variables" as *;
 
 .platform-stats {
-  grid-column: span 12;
   background-color: $surface-color;
   border-radius: 1rem;
   corner-shape: squircle;
@@ -13,30 +12,38 @@
     border-radius: 0.7rem;
   }
 
-  h2 {
-    margin: 0 0 1rem;
-    font-size: 1rem;
-    font-weight: 600;
-    color: $text-secondary;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+  h3 {
+    margin: 0;
+    margin-bottom: 0.8rem;
   }
 
   .platform-bar {
     display: flex;
     width: 100%;
-    height: 2rem;
     border-radius: 0.5rem;
     overflow: hidden;
     gap: 2px;
+    cursor: pointer;
 
     .platform-bar-segment {
+      box-sizing: border-box;
       height: 100%;
       min-width: 2px;
       transition: opacity 0.2s ease;
+      font-size: 14px;
+      font-weight: bold;
+      color: $text-primary;
+      text-shadow: 0 0 10px rgb(0, 50, 0);
+      padding: 0.3em;
+      padding-left: 0.6em;
+      overflow: hidden;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
 
-      &:hover {
+      span:nth-child(2) {
         opacity: 0.8;
+        font-weight: normal;
       }
     }
   }
@@ -68,5 +75,26 @@
     .platform-legend-pct {
       color: $text-secondary;
     }
+  }
+
+  .platform-legend-dot,
+  .platform-bar-segment {
+    &:nth-child(1) {
+      background-color: rgba(29, 185, 84, 0.9);
+    }
+
+    &:nth-child(2) {
+      background-color: rgba(29, 185, 84, 0.7);
+    }
+
+    &:nth-child(3) {
+      background-color: rgba(29, 185, 84, 0.5);
+    }
+
+    &:nth-child(4) {
+      background-color: rgba(29, 185, 84, 0.3);
+    }
+
+    background-color: rgba(29, 185, 84, 0.1);
   }
 }

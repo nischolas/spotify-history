@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 
@@ -28,6 +28,7 @@ function normalizePlatform(raw: string | undefined | null): PlatformBucket {
 
 export const PlatformStats = () => {
   const { filteredRawData } = useSpotifyStore();
+  const [showLegend, setShowLegend] = useState(false);
   const { t } = useTranslation();
 
   const segments = useMemo(() => {
@@ -52,26 +53,37 @@ export const PlatformStats = () => {
 
   return (
     <div className="platform-stats section">
-      <h2>{t("platformStats.title")}</h2>
-      <div className="platform-bar">
+      <h3>{t("platformStats.title")}</h3>
+      <div className="platform-bar" onClick={() => setShowLegend((prev) => !prev)}>
         {segments.map(({ bucket, label, pct, color }) => (
           <div
             key={bucket}
             className="platform-bar-segment"
-            style={{ width: `${pct}%`, backgroundColor: color }}
+            style={{ width: `${pct}%`, backgroundColor: showLegend ? color : undefined }}
             title={`${label}: ${pct.toFixed(1)}%`}
-          />
-        ))}
-      </div>
-      <div className="platform-legend">
-        {segments.map(({ bucket, label, pct, color }) => (
-          <div key={bucket} className="platform-legend-item">
-            <span className="platform-legend-dot" style={{ backgroundColor: color }} />
-            <span className="platform-legend-label">{label}</span>
-            <span className="platform-legend-pct">{pct.toFixed(1)}%</span>
+          >
+            {!showLegend ? (
+              <>
+                <span className="platform-legend-label">{label}</span>&nbsp;
+                <span className="platform-legend-pct">{pct.toFixed(0)}%</span>
+              </>
+            ) : (
+              <>&nbsp;</>
+            )}
           </div>
         ))}
       </div>
+      {showLegend && (
+        <div className="platform-legend">
+          {segments.map(({ bucket, label, pct, color }) => (
+            <div key={bucket} className="platform-legend-item">
+              <span className="platform-legend-dot" style={{ backgroundColor: color }} />
+              <span className="platform-legend-label">{label}</span>
+              <span className="platform-legend-pct">{pct.toFixed(0)}%</span>
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 };

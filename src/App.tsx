@@ -73,8 +73,8 @@ function App() {
             </div>
             <div className="sections">
               <GeneralStats />
-              <PlatformStats />
               <DateRangeFilter />
+              <PlatformStats />
               <TopTracks />
               <TopTracksByYear />
               <TopArtists />
