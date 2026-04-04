@@ -96,9 +96,9 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
                   title={t("table.statsAndPreview")}
                 >
                   <td>{index + 1}</td>
-                  <td>{item.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
-                  {!artistFilter && <td>{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>}
-                  <td className="monospace">
+                  <td className="sk">{item.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
+                  {!artistFilter && <td className="sk">{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>}
+                  <td className="monospace sk">
                     {sortByState === "time" ? (
                       <>
                         {hours}

@@ -72,8 +72,8 @@ export const TopArtists: React.FC<TopArtistsProps> = ({ limit = 10, isModal = fa
               return (
                 <tr key={index} onClick={() => setSelectedArtist(artist.artist)} style={{ cursor: "pointer" }} title={t("topTracks.title")}>
                   <td>{index + 1}</td>
-                  <td>{artist.artist}</td>
-                  <td className="monospace">
+                  <td className="sk">{artist.artist}</td>
+                  <td className="monospace sk">
                     {hours}
                     <span className="muted">h</span> {minutes.toString().padStart(2, "0")}
                     <span className="muted">m</span>

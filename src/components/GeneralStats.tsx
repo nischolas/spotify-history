@@ -31,7 +31,7 @@ export const GeneralStats = () => {
   return (
     <div className="general-stats">
       <div className="stat-card">
-        <span className="stat-value time-value">
+        <span className="stat-value time-value sk">
           {stats.totalTime.days}
           <span style={{ fontSize: "0.7em", color: "#0e7a34" }}>{t("generalStats.days")}</span> {stats.totalTime.hours}
           <span style={{ fontSize: "0.7em", color: "#0e7a34" }}>{t("generalStats.hours")}</span> {stats.totalTime.minutes}
@@ -40,15 +40,15 @@ export const GeneralStats = () => {
         <span className="stat-label">{t("generalStats.totalTime")}</span>
       </div>
       <div className="stat-card">
-        <span className="stat-value time-value">{stats.filteredRawCount.toLocaleString()}</span>
+        <span className="stat-value time-value sk">{stats.filteredRawCount.toLocaleString()}</span>
         <span className="stat-label">{t("generalStats.rawDataLength")}</span>
       </div>
       <div className="stat-card">
-        <span className="stat-value">{stats.uniqueSongs.toLocaleString()}</span>
+        <span className="stat-value sk">{stats.uniqueSongs.toLocaleString()}</span>
         <span className="stat-label">{t("generalStats.uniqueSongs")}</span>
       </div>
       <div className="stat-card">
-        <span className="stat-value">{stats.uniqueArtists.toLocaleString()}</span>
+        <span className="stat-value sk">{stats.uniqueArtists.toLocaleString()}</span>
         <span className="stat-label">{t("generalStats.uniqueArtists")}</span>
       </div>
     </div>

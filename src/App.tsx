@@ -18,7 +18,7 @@ import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 
 function App() {
-  const { isDataLoaded, reset, initialize } = useSpotifyStore();
+  const { isDataLoaded, isSkeleton, reset, initialize } = useSpotifyStore();
   const { trackUri, trackName, artistName, closePlayer } = usePreviewPlayer();
   const { t } = useTranslation();
 
@@ -36,7 +36,7 @@ function App() {
 
   return (
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
-      <main>
+      <main className={isSkeleton ? "skeleton" : ""}>
         {!isDataLoaded ? (
           <header className="app-header">
             <div>
