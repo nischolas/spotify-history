@@ -17,10 +17,32 @@ import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 
+import { useJoyride } from "react-joyride";
+
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
   const { trackUri, trackName, artistName, closePlayer } = usePreviewPlayer();
   const { t } = useTranslation();
+
+  const steps = [
+    { content: "Ziehe den Slider um den Zeitraum einzugrenzen", target: '[data-step="1"]' },
+    { content: "Klick auf einen Track für mehr Details", target: "tr:nth-child(3)" },
+  ];
+
+  const { controls, on, Tour } = useJoyride({
+    continuous: true,
+    steps,
+    options: {
+      skipBeacon: true,
+      scrollOffset: 200,
+    },
+  });
+
+  useEffect(() => {
+    return on("tour:end", () => {
+      console.log("Tour finished!");
+    });
+  }, [on]);
 
   useEffect(() => {
     document.title = t("app.title");
@@ -36,6 +58,7 @@ function App() {
 
   return (
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
+      {Tour}
       <main>
         {!isDataLoaded ? (
           <header className="app-header">
@@ -67,9 +90,14 @@ function App() {
           <div className="data-section">
             <div className="actions">
               <h1>{t("app.title")}</h1>
-              <button onClick={reset} className="reset-btn">
-                <HiArrowsRightLeft /> {t("app.importDifferent")}
-              </button>
+              <div className="actions-btns">
+                <button onClick={() => controls.start()} className="reset-btn">
+                  Start Tour
+                </button>
+                <button onClick={reset} className="reset-btn">
+                  <HiArrowsRightLeft /> {t("app.importDifferent")}
+                </button>
+              </div>
             </div>
             <div className="sections">
               <GeneralStats />

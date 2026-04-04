@@ -203,6 +203,7 @@ export const DateRangeFilter: React.FC = () => {
           ></div>
           <div
             className="range-handle range-handle-start"
+            data-step="1"
             style={{ left: `${startPercentage}%` }}
             onMouseDown={handleMouseDown("start")}
             onTouchStart={handleTouchDown("start")}
