@@ -17,10 +17,33 @@ import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 
+import { useJoyride } from "react-joyride";
+
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
   const { trackUri, trackName, artistName, closePlayer } = usePreviewPlayer();
   const { t } = useTranslation();
+
+  const steps = [
+    { content: "Ziehe den Slider um den Zeitraum einzugrenzen", target: '[data-step="1"]' },
+    { content: "Klick auf einen Track für mehr Details", target: "tr:nth-child(3)" },
+    { content: "This is another awesome feature!", target: '[data-step="2"]' },
+  ];
+
+  const { controls, on, Tour } = useJoyride({
+    continuous: true,
+    steps,
+    options: {
+      skipBeacon: true,
+      scrollOffset: 200,
+    },
+  });
+
+  useEffect(() => {
+    return on("tour:end", () => {
+      console.log("Tour finished!");
+    });
+  }, [on]);
 
   useEffect(() => {
     document.title = t("app.title");
@@ -36,6 +59,8 @@ function App() {
 
   return (
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
+      <button onClick={() => controls.start()}>Start Tour</button>
+      {Tour}
       <main>
         {!isDataLoaded ? (
           <header className="app-header">
