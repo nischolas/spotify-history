@@ -207,7 +207,7 @@ export const DateRangeFilter: React.FC = () => {
             onMouseDown={handleMouseDown("start")}
             onTouchStart={handleTouchDown("start")}
           >
-            <div className="range-label">{formatMonthYear(months[rangeStart])}</div>
+            <div className="range-label sk">{formatMonthYear(months[rangeStart])}</div>
           </div>
           <div
             className="range-handle range-handle-end"
@@ -215,7 +215,7 @@ export const DateRangeFilter: React.FC = () => {
             onMouseDown={handleMouseDown("end")}
             onTouchStart={handleTouchDown("end")}
           >
-            <div className="range-label">{formatMonthYear(months[rangeEnd])}</div>
+            <div className="range-label sk">{formatMonthYear(months[rangeEnd])}</div>
           </div>
         </div>
       </div>

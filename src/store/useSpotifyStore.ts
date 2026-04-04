@@ -3,6 +3,7 @@ import { persist, createJSONStorage, type StateStorage } from "zustand/middlewar
 import { get as getKey, set as setKey, del as delKey } from "idb-keyval";
 import type { SpotifyHistoryItem } from "@/types";
 import { aggregateTracks } from "@/utils/aggregateTracks";
+import { dummyRawData, dummyAggregatedData } from "@/data/dummyData";
 
 interface SpotifyStore {
   // Raw data - all individual streaming events
@@ -25,6 +26,7 @@ interface SpotifyStore {
   // Check if existing data is found but not yet loaded
   isDataLoaded: boolean;
   isDataLoadedInIDB: boolean;
+  isSkeleton: boolean;
 
   // Actions
   setRawData: (data: SpotifyHistoryItem[]) => void;
@@ -53,6 +55,7 @@ const initialState = {
   error: null,
   isDataLoaded: false,
   isDataLoadedInIDB: false,
+  isSkeleton: false,
 };
 
 function filterByDateRange(items: SpotifyHistoryItem[], startDate: string | null, endDate: string | null): SpotifyHistoryItem[] {
@@ -128,21 +131,20 @@ export const useSpotifyStore = create<SpotifyStore>()(
       },
 
       restoreSession: async () => {
-        set({ isLoading: true });
+        set({ rawData: dummyRawData, filteredRawData: dummyRawData, aggregatedData: dummyAggregatedData, isDataLoaded: true, isSkeleton: true, isLoading: true });
         try {
           const storedRaw = await getKey("spotify-raw-data");
           if (storedRaw && Array.isArray(storedRaw) && storedRaw.length > 0) {
             const { startDate, endDate } = get();
             const filteredRaw = filterByDateRange(storedRaw, startDate, endDate);
-            set({ rawData: storedRaw, filteredRawData: filteredRaw, isDataLoaded: true, isDataLoadedInIDB: false });
             const aggregated = await aggregateInWorker(storedRaw);
-            set({ aggregatedData: aggregated });
+            set({ rawData: storedRaw, filteredRawData: filteredRaw, aggregatedData: aggregated, isDataLoadedInIDB: false, isSkeleton: false });
           } else {
-            set({ isDataLoaded: false, isDataLoadedInIDB: false });
+            set({ isDataLoaded: false, isDataLoadedInIDB: false, isSkeleton: false });
           }
         } catch (err) {
           console.error("Failed to restore raw data:", err);
-          set({ error: "Failed to restore data" });
+          set({ error: "Failed to restore data", isSkeleton: false });
         } finally {
           set({ isLoading: false });
         }
@@ -154,24 +156,28 @@ export const useSpotifyStore = create<SpotifyStore>()(
       },
 
       loadData: async (rawItems) => {
-        const { startDate, endDate } = get();
-        const filteredRaw = filterByDateRange(rawItems, startDate, endDate);
-        set({ rawData: rawItems, filteredRawData: filteredRaw, isLoading: true, error: null });
+        set({ rawData: dummyRawData, filteredRawData: dummyRawData, aggregatedData: dummyAggregatedData, isDataLoaded: true, isSkeleton: true, isLoading: true, error: null });
 
         // Save raw data to indexedDB manually
         setKey("spotify-raw-data", rawItems).catch((err) => console.error("Failed to save raw data:", err));
 
+        const { startDate, endDate } = get();
+        const filteredRaw = filterByDateRange(rawItems, startDate, endDate);
+
         try {
           const aggregated = await aggregateInWorker(rawItems);
           set({
+            rawData: rawItems,
+            filteredRawData: filteredRaw,
             aggregatedData: aggregated,
             isLoading: false,
+            isSkeleton: false,
             isDataLoaded: rawItems.length > 0,
             error: aggregated.length === 0 ? "No valid track data found to aggregate (missing spotify_track_uri)." : null,
           });
         } catch (err) {
           console.error("Failed to aggregate data:", err);
-          set({ isLoading: false, error: "Failed to process data." });
+          set({ isLoading: false, isSkeleton: false, error: "Failed to process data." });
         }
       },
 

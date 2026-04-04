@@ -148,13 +148,13 @@ export const TopTracksByYear: React.FC<TopTracksByYearProps> = ({ groupBy = "yea
                       style={{ cursor: "pointer" }}
                       title={t("table.statsAndPreview")}
                     >
-                      <td>
+                      <td className="sk">
                         {groupBy === "year"
                           ? groupKey
                           : new Date(Number(groupKey.split("-")[0]), Number(groupKey.split("-")[1]) - 1).toLocaleDateString(i18n.language, { month: "short" })}
                       </td>
-                      <td>{track.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
-                      <td>{track.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
+                      <td className="sk">{track.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
+                      <td className="sk">{track.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
                     </tr>
                   </React.Fragment>
                 );
