@@ -27,7 +27,6 @@ function App() {
   const steps = [
     { content: "Ziehe den Slider um den Zeitraum einzugrenzen", target: '[data-step="1"]' },
     { content: "Klick auf einen Track für mehr Details", target: "tr:nth-child(3)" },
-    { content: "This is another awesome feature!", target: '[data-step="2"]' },
   ];
 
   const { controls, on, Tour } = useJoyride({
@@ -59,7 +58,6 @@ function App() {
 
   return (
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
-      <button onClick={() => controls.start()}>Start Tour</button>
       {Tour}
       <main>
         {!isDataLoaded ? (
@@ -92,9 +90,14 @@ function App() {
           <div className="data-section">
             <div className="actions">
               <h1>{t("app.title")}</h1>
-              <button onClick={reset} className="reset-btn">
-                <HiArrowsRightLeft /> {t("app.importDifferent")}
-              </button>
+              <div className="actions-btns">
+                <button onClick={() => controls.start()} className="reset-btn">
+                  Start Tour
+                </button>
+                <button onClick={reset} className="reset-btn">
+                  <HiArrowsRightLeft /> {t("app.importDifferent")}
+                </button>
+              </div>
             </div>
             <div className="sections">
               <GeneralStats />
