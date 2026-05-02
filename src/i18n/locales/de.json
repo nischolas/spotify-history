@@ -8,7 +8,7 @@
     "recoveryTitle": "Vorherige Daten gefunden",
     "recoveryMessage": "Es sind noch vorherige Daten auf deinem Gerät gespeichert. Möchtest du diese laden?",
     "loadBtn": "Daten laden",
-    "discardBtn": "Löschen"
+    "discardBtn": "Daten löschen"
   },
   "generalStats": {
     "totalTime": "Gesamtdauer",
@@ -200,6 +200,15 @@
       "description": "Nutzer haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung sowie Datenübertragbarkeit gemäß Art. 15–20 DSGVO.",
       "complaint": "Zudem besteht ein Beschwerderecht bei einer Datenschutzaufsichtsbehörde."
     }
+  },
+  "companionTracks": {
+    "title": "Treue Begleiter",
+    "subtitle": "Songs, die über deine gesamte Hörerkarriere immer wieder aufgetaucht sind.",
+    "unknownTrack": "Unbekannter Titel",
+    "unknownArtist": "Unbekannter Künstler",
+    "headerScore": "Begleit-Score",
+    "monthsUnit": "M",
+    "noData": "Noch nicht genug Daten vorhanden."
   },
   "platformStats": {
     "title": "Abspielplattformen",
