@@ -118,10 +118,14 @@ export const FileUpload: React.FC = () => {
         <h2>{t("popup.recoveryTitle")}</h2>
         <p>{t("popup.recoveryMessage")}</p>
         <div className="popup-actions">
-          <button disabled={storeIsLoading} className={storeIsLoading ? "primary-btn disabled" : "primary-btn"} onClick={restoreSession}>
+          <button disabled={storeIsLoading} className={storeIsLoading ? "primary-btn reset-btn disabled" : "primary-btn reset-btn"} onClick={restoreSession}>
             {storeIsLoading ? t("fileImport.processing") : t("popup.loadBtn")}
           </button>
-          <button disabled={storeIsLoading} className={storeIsLoading ? "secondary-btn disabled" : "secondary-btn"} onClick={discardSession}>
+          <button
+            disabled={storeIsLoading}
+            className={storeIsLoading ? "secondary-btn reset-btn disabled" : "secondary-btn reset-btn"}
+            onClick={discardSession}
+          >
             {t("popup.discardBtn")}
           </button>
         </div>

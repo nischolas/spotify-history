@@ -27,7 +27,7 @@
 }
 
 .lang-btn {
-  background: transparent;
+  background: rgba(255, 255, 255, 0.03);
   border: 1px solid $border-color;
   color: $text-secondary;
   padding: 0.5rem 1rem;
@@ -40,15 +40,16 @@
   gap: 0.5rem;
 
   &:hover {
-    border-color: $primary-color;
     color: $text-primary;
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(255, 255, 255, 0.2);
   }
 
   &.active {
-    background-color: $primary-color;
-    border-color: $primary-color;
-    color: #000;
-    font-weight: 600;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    color: $text-primary;
+    // font-weight: 600;
   }
 }
 
