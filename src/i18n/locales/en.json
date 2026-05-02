@@ -8,7 +8,7 @@
     "recoveryTitle": "Existing Data Found",
     "recoveryMessage": "There is existing data on your device. Do you want to load it?",
     "loadBtn": "Load Data",
-    "discardBtn": "Delete"
+    "discardBtn": "Delete Data"
   },
   "generalStats": {
     "totalTime": "Total Time",
@@ -123,7 +123,7 @@
   "footer": {
     "language": "Language",
     "legal": "Legal",
-    "by": "Made by",
+    "by": "Built by",
     "notAffiliated": "Not affiliated with Spotify."
   },
   "common": {
@@ -206,6 +206,15 @@
       "description": "Users have the right to access, rectification, erasure, restriction of processing, and data portability in accordance with Articles 15–20 GDPR.",
       "complaint": "Furthermore, users have the right to lodge a complaint with a supervisory authority."
     }
+  },
+  "companionTracks": {
+    "title": "Companion Tracks",
+    "subtitle": "Songs that have been a recurring presence across your listening history.",
+    "unknownTrack": "Unknown Track",
+    "unknownArtist": "Unknown Artist",
+    "headerScore": "Companion Score",
+    "monthsUnit": "m",
+    "noData": "Not enough data yet."
   },
   "platformStats": {
     "title": "Listening Platforms",

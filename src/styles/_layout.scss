@@ -89,11 +89,11 @@
   }
 
   .top-artists {
-    grid-column: span 5;
+    grid-column: span 6;
   }
 
   .skipped-tracks {
-    grid-column: span 7;
+    grid-column: span 6;
   }
 
   .reason-start-tracks {
@@ -104,7 +104,11 @@
   }
 
   .one-hit-wonders {
-    grid-column: span 12;
+    grid-column: span 6;
+  }
+
+  .companion-tracks {
+    grid-column: span 6;
   }
 }
 

@@ -13,6 +13,7 @@ import { useTranslation } from "react-i18next";
 import { GeneralStats } from "@/components/GeneralStats";
 import { PlatformStats } from "@/components/PlatformStats";
 import { OneHitWonders } from "@/components/OneHitWonders";
+import { CompanionTracks } from "@/components/CompanionTracks";
 import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
@@ -76,12 +77,13 @@ function App() {
               <DateRangeFilter />
               <PlatformStats />
               <TopTracks />
-              <TopTracksByYear />
               <TopArtists />
-              <SkippedTracks />
+              <TopTracksByYear />
+              <CompanionTracks />
               <ReasonStartTracks reason_start="clickrow" />
               <ReasonStartTracks reason_start="backbtn" />
               <OneHitWonders />
+              <SkippedTracks />
             </div>
           </div>
         )}

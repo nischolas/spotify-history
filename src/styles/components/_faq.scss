@@ -1,4 +1,4 @@
-@use '../variables' as *;
+@use "../variables" as *;
 
 .faq-container {
   margin-top: 6rem;
@@ -55,7 +55,7 @@
       font-size: 1.25rem;
       line-height: 1;
       font-weight: bold;
-      color: var(--primary-color);
+      color: var(--text-secondary);
     }
   }
 
