@@ -17,6 +17,7 @@ import { CompanionTracks } from "@/components/CompanionTracks";
 import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
+import { Features } from "./components/Features";
 
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
@@ -39,31 +40,34 @@ function App() {
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
       <main>
         {!isDataLoaded ? (
-          <header className="app-header">
-            <div>
-              <h1>{t("app.title")}</h1>
-              <p className="subtitle">{t("app.subtitle")}</p>
-              <div className="tutorial-section">
-                <h3>{t("fileImport.tutorialTitle")}</h3>
-                <ol>
-                  <li>
-                    {t("fileImport.tutorialStep1")}{" "}
-                    <a href="https://www.spotify.com/account/privacy" target="_blank" rel="noopener noreferrer">
-                      {t("fileImport.tutorialStep1Link")}
-                    </a>
-                  </li>
-                  <li>
-                    {t("fileImport.tutorialStep2")} <strong>{t("fileImport.tutorialStep2Bold")}</strong> <br /> {t("fileImport.tutorialStep2End")}
-                  </li>
-                  <li>{t("fileImport.tutorialStep3")}</li>
-                  <li>{t("fileImport.tutorialStep4")}</li>
-                </ol>
+          <>
+            <header className="app-header">
+              <div>
+                <h1>{t("app.title")}</h1>
+                <p className="subtitle">{t("app.subtitle")}</p>
+                <div className="tutorial-section">
+                  <h3>{t("fileImport.tutorialTitle")}</h3>
+                  <ol>
+                    <li>
+                      {t("fileImport.tutorialStep1")}{" "}
+                      <a href="https://www.spotify.com/account/privacy" target="_blank" rel="noopener noreferrer">
+                        {t("fileImport.tutorialStep1Link")}
+                      </a>
+                    </li>
+                    <li>
+                      {t("fileImport.tutorialStep2")} <strong>{t("fileImport.tutorialStep2Bold")}</strong> <br /> {t("fileImport.tutorialStep2End")}
+                    </li>
+                    <li>{t("fileImport.tutorialStep3")}</li>
+                    <li>{t("fileImport.tutorialStep4")}</li>
+                  </ol>
+                </div>
               </div>
-            </div>
-            <div className="upload-section">
-              <FileUpload />
-            </div>
-          </header>
+              <div className="upload-section">
+                <FileUpload />
+              </div>
+            </header>
+            <Features />
+          </>
         ) : (
           <div className="data-section">
             <div className="actions">

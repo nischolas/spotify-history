@@ -1,7 +1,7 @@
 {
   "app": {
     "title": "Erkunde deinen Spotify Streamingverlauf",
-    "subtitle": "Deine Daten bleiben auf deinem Gerät. Die Verabeitung findet lokal in deinem Browser statt.",
+    "subtitle": "Deine Daten bleiben auf deinem Gerät. Die Verarbeitung findet lokal in deinem Browser statt.",
     "importDifferent": "Andere Datei importieren"
   },
   "popup": {
@@ -18,6 +18,9 @@
     "days": "Tg",
     "hours": "Std",
     "minutes": "Min"
+  },
+  "general": {
+    "and": "und"
   },
   "table": {
     "headerTitle": "Titel",
@@ -95,7 +98,7 @@
   },
   "skippedTracks": {
     "title": "Meist übersprungene Titel",
-    "subtitle": "Bereits nach weniger als {{seconds}} Sekunden Wiedergabe übersprungen",
+    "subtitle": "Nach weniger als {{seconds}} Sekunden übersprungen",
     "headerTotalPlays": "Gesamt",
     "unknownTrack": "Unbekannter Titel",
     "unknownArtist": "Unbekannter Künstler"
@@ -225,5 +228,35 @@
     "webPlayer": "Web Player",
     "tv": "TV",
     "other": "Sonstiges"
+  },
+  "features": {
+    "title": "Funktionen und Features",
+    "subtitle": "Visualisiere die Daten deiner Extended Streaming History und finde dabei vielleicht den ein oder anderen vergessenen Schatz wieder.",
+    "extras": {
+      "dateRange": {
+        "title": "Datumsfilter",
+        "subtitle": "Filtere alle Ansichten auf einen bestimmten Zeitraum"
+      },
+      "generalStats": {
+        "title": "Allgemeine Statistiken",
+        "subtitle": "Gesamthörzeit, einzigartige Songs und Künstler auf einen Blick"
+      },
+      "platforms": {
+        "title": "Plattformen",
+        "subtitle": "Sieh, auf welchen Geräten du am häufigsten hörst"
+      },
+      "searchByArtist": {
+        "title": "Künstlersuche",
+        "subtitle": "Durchsuche alle Tracks nach einem bestimmten Künstler"
+      },
+      "trackStats": {
+        "title": "Track-Statistiken",
+        "subtitle": "Klicke auf einen Song für Skip- und Hörstatistiken"
+      },
+      "previewPlayer": {
+        "title": "Vorschau-Player",
+        "subtitle": "Hör eine 30-Sekunden-Vorschau jedes Songs direkt in der App"
+      }
+    }
   }
 }
