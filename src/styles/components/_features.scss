@@ -1,0 +1,50 @@
+@use "../variables" as *;
+
+.features {
+  margin-top: 6rem;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    color: var(--text-primary);
+  }
+
+  .features-subtitle {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    &--extras {
+      margin-top: 2rem;
+    }
+  }
+
+  .feature-card {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1rem;
+    background: var(--surface-color);
+
+    h4 {
+      margin: 0 0 0.35rem;
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-secondary);
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.82rem;
+      color: var(--text-secondary);
+      opacity: 0.7;
+      line-height: 1.5;
+    }
+  }
+}

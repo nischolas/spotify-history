@@ -219,5 +219,38 @@
     "webPlayer": "Web Player",
     "tv": "TV",
     "other": "Other"
+  },
+  "general": {
+    "and": "and"
+  },
+  "features": {
+    "title": "Tools and Features",
+    "subtitle": "Visualize the data in your Extended Streaming History and maybe rediscover a few forgotten favorites along the way.",
+    "extras": {
+      "dateRange": {
+        "title": "Date Range Filter",
+        "subtitle": "Filter all views to a custom time window"
+      },
+      "generalStats": {
+        "title": "General Stats",
+        "subtitle": "Your listening time, unique songs, and artists at a glance"
+      },
+      "platforms": {
+        "title": "Platforms",
+        "subtitle": "See which devices and apps you use most"
+      },
+      "searchByArtist": {
+        "title": "Search by Artist",
+        "subtitle": "Find and browse tracks by a specific artist"
+      },
+      "trackStats": {
+        "title": "Single Track Stats",
+        "subtitle": "Click any row to see detailed skip and listening stats"
+      },
+      "previewPlayer": {
+        "title": "Track Preview Player",
+        "subtitle": "Play a 30-second preview directly in the app"
+      }
+    }
   }
 }
