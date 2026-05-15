@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import JSZip from "jszip";
 import type { SpotifyHistoryItem } from "@/types";
 import { useSpotifyStore } from "@/store/useSpotifyStore";
 import { useTranslation } from "react-i18next";
 import { isMobile } from "@/utils/isMobile";
+import { parseSpotifyJsonText, parseSpotifyZip } from "@/utils/parseSpotifyData";
 
 export const FileUpload: React.FC = () => {
   const { loadData, isDataLoadedInIDB, isDataLoaded, restoreSession, discardSession, isLoading: storeIsLoading } = useSpotifyStore();
@@ -22,67 +22,26 @@ export const FileUpload: React.FC = () => {
     const readers: Promise<void>[] = [];
     let ignoredCount = 0;
 
-    const processJsonContent = (content: string, filename: string) => {
-      try {
-        const json = JSON.parse(content);
-        if (Array.isArray(json)) {
-          for (const item of json) {
-            allData.push({
-              ts: item.ts,
-              ms_played: item.ms_played,
-              spotify_track_uri: item.spotify_track_uri ?? null,
-              master_metadata_track_name: item.master_metadata_track_name ?? null,
-              master_metadata_album_artist_name: item.master_metadata_album_artist_name ?? null,
-              reason_start: item.reason_start,
-              reason_end: item.reason_end,
-              shuffle: item.shuffle,
-              platform: item.platform,
-            });
-          }
-        }
-      } catch (err) {
-        console.error(`Error parsing file ${filename}:`, err);
-      }
-    };
-
     for (let i = 0; i < files.length; i++) {
       const file = files[i];
 
       if (file.name.endsWith(".zip")) {
-        const zipPromise = new Promise<void>((resolve, reject) => {
-          JSZip.loadAsync(file)
-            .then((zip) => {
-              const zipFilePromises: Promise<void>[] = [];
-
-              zip.forEach((relativePath, zipEntry) => {
-                if (zipEntry.dir) return;
-                const filename = relativePath.split("/").pop() || relativePath;
-
-                if (filename.startsWith("Streaming_History_Audio_") && filename.endsWith(".json")) {
-                  const p = zipEntry.async("string").then((content) => {
-                    processJsonContent(content, filename);
-                  });
-                  zipFilePromises.push(p);
-                } else {
-                  ignoredCount++;
-                }
-              });
-
-              return Promise.all(zipFilePromises);
-            })
-            .then(() => resolve())
-            .catch((err) => {
-              console.error(`Error reading zip file ${file.name}:`, err);
-              reject(err);
-            });
-        });
+        const zipPromise = parseSpotifyZip(file)
+          .then(({ items, ignoredCount: zipIgnored }) => {
+            allData.push(...items);
+            ignoredCount += zipIgnored;
+          })
+          .catch((err) => {
+            console.error(`Error reading zip file ${file.name}:`, err);
+            throw err;
+          });
         readers.push(zipPromise);
       } else if (file.name.startsWith("Streaming_History_Audio_") && file.name.endsWith(".json")) {
         const readerPromise = new Promise<void>((resolve, reject) => {
           const reader = new FileReader();
           reader.onload = (e) => {
             const text = e.target?.result as string;
-            processJsonContent(text, file.name);
+            allData.push(...parseSpotifyJsonText(text, file.name));
             resolve();
           };
           reader.onerror = () => reject(new Error(`Failed to read file ${file.name}`));
@@ -112,6 +71,27 @@ export const FileUpload: React.FC = () => {
     }
   };
 
+  const handleSampleData = async () => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      const res = await fetch("/sample.zip");
+      if (!res.ok) throw new Error(`Failed to fetch sample.zip: ${res.status}`);
+      const blob = await res.blob();
+      const { items } = await parseSpotifyZip(blob);
+      if (items.length === 0) {
+        setError(t("fileImport.errorSampleFetch"));
+        return;
+      }
+      loadData(items);
+    } catch (err) {
+      console.error(err);
+      setError(t("fileImport.errorSampleFetch"));
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   if (isDataLoadedInIDB && !isDataLoaded) {
     return (
       <div className="file-upload-container">
@@ -133,10 +113,12 @@ export const FileUpload: React.FC = () => {
     );
   }
 
+  const busy = isLoading || storeIsLoading;
+
   return (
-    <div className={`file-upload-container ${isLoading || storeIsLoading ? "disabled" : ""}`}>
+    <div className={`file-upload-container ${busy ? "disabled" : ""}`}>
       <label htmlFor="file-upload" className="file-upload-label">
-        {isLoading || storeIsLoading ? (
+        {busy ? (
           t("fileImport.processing")
         ) : (
           <>
@@ -152,15 +134,10 @@ export const FileUpload: React.FC = () => {
           </>
         )}
       </label>
-      <input
-        disabled={isLoading || storeIsLoading}
-        id="file-upload"
-        type="file"
-        accept=".json,.zip"
-        multiple
-        onChange={handleFileChange}
-        className="file-upload-input"
-      />
+      <input disabled={busy} id="file-upload" type="file" accept=".json,.zip" multiple onChange={handleFileChange} className="file-upload-input" />
+      <button type="button" disabled={busy} onClick={handleSampleData} className="reset-btn">
+        {busy ? t("fileImport.processing") : t("fileImport.sampleDataButton")}
+      </button>
       {error && <div className="error-message">{error}</div>}
       {isMobile && <p className="warning-message">{t("fileImport.mobileWarning")}</p>}
       <p className="hint">{t("fileImport.hint")}</p>

@@ -45,6 +45,8 @@
     "tutorialStep4": "Import the ZIP file from the mail here",
     "errorNoData": "No valid data found. Imported files must be JSON files starting with \"Streaming_History_Audio_\" or ZIP archives containing them. Ignored {{count}} file(s)/entry(s).",
     "errorProcessing": "Error processing files. Please try again.",
+    "errorSampleFetch": "Failed to load sample data. Please try again.",
+    "sampleDataButton": "Try with sample data",
     "mobileWarning": "Note: Processing large datasets on mobile devices may cause performance issues. If you experience problems, please try again on a desktop computer."
   },
   "faq": {

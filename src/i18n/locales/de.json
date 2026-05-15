@@ -48,6 +48,8 @@
     "tutorialStep4": "Importiere hier die ZIP-Datei aus der E-Mail",
     "errorNoData": "Keine gültigen Daten gefunden. Importierte Dateien müssen JSON-Dateien sein, die mit \"Streaming_History_Audio_\" beginnen, oder ZIP-Archive, die diese enthalten. {{count}} Datei(en)/Eintrag/Einträge ignoriert.",
     "errorProcessing": "Fehler beim Verarbeiten der Dateien. Bitte versuche es erneut.",
+    "errorSampleFetch": "Beispieldaten konnten nicht geladen werden. Bitte versuche es erneut.",
+    "sampleDataButton": "Mit Beispieldaten testen",
     "mobileWarning": "Hinweis: Die Verarbeitung großer Datenmengen auf Mobilgeräten kann zu Leistungsproblemen führen. Falls Probleme auftreten, bitte versuche es nochmal auf einem Desktop-Computer."
   },
   "faq": {
