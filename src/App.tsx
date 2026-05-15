@@ -18,6 +18,7 @@ import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
 import { Features } from "./components/Features";
+import { SampleDataButton } from "@/components/SampleDataButton";
 
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
@@ -60,38 +61,43 @@ function App() {
                     <li>{t("fileImport.tutorialStep3")}</li>
                     <li>{t("fileImport.tutorialStep4")}</li>
                   </ol>
+                  <h3>{t("fileImport.sampleDataTitle")}</h3>
+                  <SampleDataButton />
                 </div>
               </div>
               <div className="upload-section">
                 <FileUpload />
               </div>
             </header>
+            <FAQ />
             <Features />
           </>
         ) : (
-          <div className="data-section">
-            <div className="actions">
-              <h1>{t("app.title")}</h1>
-              <button onClick={reset} className="reset-btn">
-                <HiArrowsRightLeft /> {t("app.importDifferent")}
-              </button>
+          <>
+            <div className="data-section">
+              <div className="actions">
+                <h1>{t("app.title")}</h1>
+                <button onClick={reset} className="reset-btn">
+                  <HiArrowsRightLeft /> {t("app.importDifferent")}
+                </button>
+              </div>
+              <div className="sections">
+                <GeneralStats />
+                <DateRangeFilter />
+                <PlatformStats />
+                <TopTracks />
+                <TopArtists />
+                <TopTracksByYear />
+                <CompanionTracks />
+                <ReasonStartTracks reason_start="clickrow" />
+                <ReasonStartTracks reason_start="backbtn" />
+                <OneHitWonders />
+                <SkippedTracks />
+              </div>
             </div>
-            <div className="sections">
-              <GeneralStats />
-              <DateRangeFilter />
-              <PlatformStats />
-              <TopTracks />
-              <TopArtists />
-              <TopTracksByYear />
-              <CompanionTracks />
-              <ReasonStartTracks reason_start="clickrow" />
-              <ReasonStartTracks reason_start="backbtn" />
-              <OneHitWonders />
-              <SkippedTracks />
-            </div>
-          </div>
+            <FAQ />
+          </>
         )}
-        <FAQ />
       </main>
 
       <PreviewPlayerDrawer trackUri={trackUri} trackName={trackName} artistName={artistName} onClose={closePlayer} />

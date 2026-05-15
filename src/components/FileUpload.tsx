@@ -6,16 +6,15 @@ import { isMobile } from "@/utils/isMobile";
 import { parseSpotifyJsonText, parseSpotifyZip } from "@/utils/parseSpotifyData";
 
 export const FileUpload: React.FC = () => {
-  const { loadData, isDataLoadedInIDB, isDataLoaded, restoreSession, discardSession, isLoading: storeIsLoading } = useSpotifyStore();
+  const { loadData, setLoading, isDataLoadedInIDB, isDataLoaded, restoreSession, discardSession, isLoading: busy } = useSpotifyStore();
   const { t } = useTranslation();
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
 
   const handleFileChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files || files.length === 0) return;
 
-    setIsLoading(true);
+    setLoading(true);
     setError(null);
 
     const allData: SpotifyHistoryItem[] = [];
@@ -58,7 +57,7 @@ export const FileUpload: React.FC = () => {
 
       if (allData.length === 0) {
         setError(t("fileImport.errorNoData", { count: ignoredCount }));
-        setIsLoading(false);
+        setLoading(false);
         return;
       }
 
@@ -66,29 +65,7 @@ export const FileUpload: React.FC = () => {
     } catch (err) {
       setError(t("fileImport.errorProcessing"));
       console.error(err);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleSampleData = async () => {
-    setIsLoading(true);
-    setError(null);
-    try {
-      const res = await fetch("/sample.zip");
-      if (!res.ok) throw new Error(`Failed to fetch sample.zip: ${res.status}`);
-      const blob = await res.blob();
-      const { items } = await parseSpotifyZip(blob);
-      if (items.length === 0) {
-        setError(t("fileImport.errorSampleFetch"));
-        return;
-      }
-      loadData(items);
-    } catch (err) {
-      console.error(err);
-      setError(t("fileImport.errorSampleFetch"));
-    } finally {
-      setIsLoading(false);
+      setLoading(false);
     }
   };
 
@@ -98,12 +75,12 @@ export const FileUpload: React.FC = () => {
         <h2>{t("popup.recoveryTitle")}</h2>
         <p>{t("popup.recoveryMessage")}</p>
         <div className="popup-actions">
-          <button disabled={storeIsLoading} className={storeIsLoading ? "primary-btn reset-btn disabled" : "primary-btn reset-btn"} onClick={restoreSession}>
-            {storeIsLoading ? t("fileImport.processing") : t("popup.loadBtn")}
+          <button disabled={busy} className={busy ? "primary-btn reset-btn disabled" : "primary-btn reset-btn"} onClick={restoreSession}>
+            {busy ? t("fileImport.processing") : t("popup.loadBtn")}
           </button>
           <button
-            disabled={storeIsLoading}
-            className={storeIsLoading ? "secondary-btn reset-btn disabled" : "secondary-btn reset-btn"}
+            disabled={busy}
+            className={busy ? "secondary-btn reset-btn disabled" : "secondary-btn reset-btn"}
             onClick={discardSession}
           >
             {t("popup.discardBtn")}
@@ -112,8 +89,6 @@ export const FileUpload: React.FC = () => {
       </div>
     );
   }
-
-  const busy = isLoading || storeIsLoading;
 
   return (
     <div className={`file-upload-container ${busy ? "disabled" : ""}`}>
@@ -135,9 +110,6 @@ export const FileUpload: React.FC = () => {
         )}
       </label>
       <input disabled={busy} id="file-upload" type="file" accept=".json,.zip" multiple onChange={handleFileChange} className="file-upload-input" />
-      <button type="button" disabled={busy} onClick={handleSampleData} className="reset-btn">
-        {busy ? t("fileImport.processing") : t("fileImport.sampleDataButton")}
-      </button>
       {error && <div className="error-message">{error}</div>}
       {isMobile && <p className="warning-message">{t("fileImport.mobileWarning")}</p>}
       <p className="hint">{t("fileImport.hint")}</p>
