@@ -55,6 +55,7 @@ All views follow the same structure — mirror `src/components/SkippedTracks.tsx
 - `src/utils/formatTime.ts` — `formatMsPlain(ms)` returns `{ hours, minutes }` for displaying playtime
 - `src/utils/aggregateTracks.ts` — groups raw items by URI, used internally by the store
 - `src/utils/trackAnalytics.ts` — skip profiles, context profiles, lifetime curves per track
+- `src/utils/parseSpotifyData.ts` — `parseSpotifyJsonText(text, filename)` and `parseSpotifyZip(blob)` produce `SpotifyHistoryItem[]` from raw Spotify export content; used by both the file upload and sample-data flows
 
 ## SpotifyHistoryItem key fields
 
