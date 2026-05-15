@@ -9,6 +9,7 @@ export const SampleDataButton: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
 
   const handleClick = async () => {
+    window.umami?.track("Loaded sample data");
     if (busy) {
       return;
     }
