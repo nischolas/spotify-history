@@ -56,13 +56,13 @@ A privacy-first web application that lets you import your Spotify Extended Strea
 
 ## Ideas / Todos
 
-- Let users try the app with sample/dummy data
-- Drag full date range slider, not just the handles
-- Make artists in all views click- and browsable
-- Mobile tables first column numbers cut after one digit
+- (Bug) Mobile tables first column numbers cut after one digit
+- (Feat) Drag full date range slider, not just the handles
+- (Feat) Make artists in all views click- and browsable
 
 ---
 
+- ✓ ~Let users try the app with sample/dummy data~
 - ✓ ~Add all features to landingpage and readme~
 - ✓ ~Transition to data view when loaded~
 - ✓ ~More performant data handling~
