@@ -172,7 +172,7 @@ export const DateRangeFilter: React.FC = () => {
   const endPercentage = ((rangeEnd - minMonthIndex) / (maxMonthIndex - minMonthIndex)) * 100;
 
   return (
-    <div className="date-range-filter table-container" ref={filterRef}>
+    <div className="date-range-filter table-container" ref={filterRef} data-step="daterangefilter">
       <div className="plays-sparkline">
         <ResponsiveContainer width="100%" height={32}>
           <AreaChart data={months.map((_, i) => ({ value: monthlyCounts[i] }))} margin={{ top: 4, right: 0, left: 0, bottom: 0 }}>
@@ -203,7 +203,6 @@ export const DateRangeFilter: React.FC = () => {
           ></div>
           <div
             className="range-handle range-handle-start"
-            data-step="1"
             style={{ left: `${startPercentage}%` }}
             onMouseDown={handleMouseDown("start")}
             onTouchStart={handleTouchDown("start")}

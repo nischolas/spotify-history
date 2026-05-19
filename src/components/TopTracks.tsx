@@ -50,7 +50,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
           <div className="title">
             <h3>{artistFilter ? t("topArtists.tracksBy", { artist: artistFilter }) : t("topTracks.title")}</h3>
             {!artistFilter ? (
-              <p>
+              <p data-step="toptracks-sortby">
                 {t("topTracks.subtitle")}{" "}
                 <span className="sort-toggle">
                   <button className={`toggle-btn ${sortByState === "time" ? "active" : ""}`} onClick={() => setSortBy("time")}>
@@ -67,7 +67,7 @@ export const TopTracks: React.FC<TopTracksProps> = ({ limit = 10, isModal = fals
             )}
           </div>
           {!isModal && (
-            <button className="reset-btn" onClick={() => setShowMoreModal(true)}>
+            <button className="reset-btn" onClick={() => setShowMoreModal(true)} data-step="toptracks-showmore">
               <RiMenuFill /> {t("common.showMore")}
             </button>
           )}
