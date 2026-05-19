@@ -14,7 +14,7 @@
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  animation: drawer-slide-in 0.3s ease-out;
+  animation: drawer-slide-in 0.5s cubic-bezier(0.11, 0.88, 0.26, 1);
   box-sizing: border-box;
   width: 100%;
 

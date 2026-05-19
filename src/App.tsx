@@ -13,9 +13,12 @@ import { useTranslation } from "react-i18next";
 import { GeneralStats } from "@/components/GeneralStats";
 import { PlatformStats } from "@/components/PlatformStats";
 import { OneHitWonders } from "@/components/OneHitWonders";
+import { CompanionTracks } from "@/components/CompanionTracks";
 import { PreviewPlayerDrawer } from "@/components/PreviewPlayerDrawer";
 import { usePreviewPlayer } from "@/hooks/usePreviewPlayer.ts";
 import { HiArrowsRightLeft } from "react-icons/hi2";
+import { Features } from "./components/Features";
+import { SampleDataButton } from "@/components/SampleDataButton";
 
 import { useJoyride } from "react-joyride";
 
@@ -61,59 +64,68 @@ function App() {
       {Tour}
       <main>
         {!isDataLoaded ? (
-          <header className="app-header">
-            <div>
-              <h1>{t("app.title")}</h1>
-              <p className="subtitle">{t("app.subtitle")}</p>
-              <div className="tutorial-section">
-                <h3>{t("fileImport.tutorialTitle")}</h3>
-                <ol>
-                  <li>
-                    {t("fileImport.tutorialStep1")}{" "}
-                    <a href="https://www.spotify.com/account/privacy" target="_blank" rel="noopener noreferrer">
-                      {t("fileImport.tutorialStep1Link")}
-                    </a>
-                  </li>
-                  <li>
-                    {t("fileImport.tutorialStep2")} <strong>{t("fileImport.tutorialStep2Bold")}</strong> <br /> {t("fileImport.tutorialStep2End")}
-                  </li>
-                  <li>{t("fileImport.tutorialStep3")}</li>
-                  <li>{t("fileImport.tutorialStep4")}</li>
-                </ol>
+          <>
+            <header className="app-header">
+              <div>
+                <h1>{t("app.title")}</h1>
+                <p className="subtitle">{t("app.subtitle")}</p>
+                <div className="tutorial-section">
+                  <h3>{t("fileImport.tutorialTitle")}</h3>
+                  <ol>
+                    <li>
+                      {t("fileImport.tutorialStep1")}{" "}
+                      <a href="https://www.spotify.com/account/privacy" target="_blank" rel="noopener noreferrer">
+                        {t("fileImport.tutorialStep1Link")}
+                      </a>
+                    </li>
+                    <li>
+                      {t("fileImport.tutorialStep2")} <strong>{t("fileImport.tutorialStep2Bold")}</strong> <br /> {t("fileImport.tutorialStep2End")}
+                    </li>
+                    <li>{t("fileImport.tutorialStep3")}</li>
+                    <li>{t("fileImport.tutorialStep4")}</li>
+                  </ol>
+                  <h3>{t("fileImport.sampleDataTitle")}</h3>
+                  <SampleDataButton />
+                </div>
               </div>
-            </div>
-            <div className="upload-section">
-              <FileUpload />
-            </div>
-          </header>
+              <div className="upload-section">
+                <FileUpload />
+              </div>
+            </header>
+            <FAQ />
+            <Features />
+          </>
         ) : (
-          <div className="data-section">
-            <div className="actions">
-              <h1>{t("app.title")}</h1>
-              <div className="actions-btns">
-                <button onClick={() => controls.start()} className="reset-btn">
-                  Start Tour
-                </button>
-                <button onClick={reset} className="reset-btn">
-                  <HiArrowsRightLeft /> {t("app.importDifferent")}
-                </button>
+          <>
+            <div className="data-section">
+              <div className="actions">
+                <h1>{t("app.title")}</h1>
+                <div className="actions-btns">
+                  <button onClick={() => controls.start()} className="reset-btn">
+                    Start Tour
+                  </button>
+                  <button onClick={reset} className="reset-btn">
+                    <HiArrowsRightLeft /> {t("app.importDifferent")}
+                  </button>
+                </div>
+              </div>
+              <div className="sections">
+                <GeneralStats />
+                <DateRangeFilter />
+                <PlatformStats />
+                <TopTracks />
+                <TopArtists />
+                <TopTracksByYear />
+                <CompanionTracks />
+                <ReasonStartTracks reason_start="clickrow" />
+                <ReasonStartTracks reason_start="backbtn" />
+                <OneHitWonders />
+                <SkippedTracks />
               </div>
             </div>
-            <div className="sections">
-              <GeneralStats />
-              <DateRangeFilter />
-              <PlatformStats />
-              <TopTracks />
-              <TopTracksByYear />
-              <TopArtists />
-              <SkippedTracks />
-              <ReasonStartTracks reason_start="clickrow" />
-              <ReasonStartTracks reason_start="backbtn" />
-              <OneHitWonders />
-            </div>
-          </div>
+            <FAQ />
+          </>
         )}
-        <FAQ />
       </main>
 
       <PreviewPlayerDrawer trackUri={trackUri} trackName={trackName} artistName={artistName} onClose={closePlayer} />

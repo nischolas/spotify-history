@@ -10,13 +10,13 @@ interface SkippedTracksProps {
   isModal?: boolean;
 }
 
+export const CUTOFF = 5000;
+
 export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModal = false }) => {
   const { filteredRawData } = useSpotifyStore();
   const { t } = useTranslation();
   const { openPlayer } = usePreviewPlayer();
   const [showMoreModal, setShowMoreModal] = useState(false);
-
-  const CUTOFF = 5000;
 
   const skippedTracks = useMemo(() => {
     const grouped = new Map<

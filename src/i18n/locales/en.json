@@ -8,7 +8,7 @@
     "recoveryTitle": "Existing Data Found",
     "recoveryMessage": "There is existing data on your device. Do you want to load it?",
     "loadBtn": "Load Data",
-    "discardBtn": "Delete"
+    "discardBtn": "Delete Data"
   },
   "generalStats": {
     "totalTime": "Total Time",
@@ -45,6 +45,9 @@
     "tutorialStep4": "Import the ZIP file from the mail here",
     "errorNoData": "No valid data found. Imported files must be JSON files starting with \"Streaming_History_Audio_\" or ZIP archives containing them. Ignored {{count}} file(s)/entry(s).",
     "errorProcessing": "Error processing files. Please try again.",
+    "errorSampleFetch": "Failed to load sample data. Please try again.",
+    "sampleDataTitle": "Want to check out what you can explore?",
+    "sampleDataDescription": "Try it out with the author's data!",
     "mobileWarning": "Note: Processing large datasets on mobile devices may cause performance issues. If you experience problems, please try again on a desktop computer."
   },
   "faq": {
@@ -123,7 +126,7 @@
   "footer": {
     "language": "Language",
     "legal": "Legal",
-    "by": "Made by",
+    "by": "Built by",
     "notAffiliated": "Not affiliated with Spotify."
   },
   "common": {
@@ -201,6 +204,15 @@
       "complaint": "Furthermore, users have the right to lodge a complaint with a supervisory authority."
     }
   },
+  "companionTracks": {
+    "title": "Companion Tracks",
+    "subtitle": "Songs that have been a recurring presence across your listening history.",
+    "unknownTrack": "Unknown Track",
+    "unknownArtist": "Unknown Artist",
+    "headerScore": "Companion Score",
+    "monthsUnit": "m",
+    "noData": "Not enough data yet."
+  },
   "platformStats": {
     "title": "Listening Platforms",
     "ios": "iOS",
@@ -210,5 +222,38 @@
     "webPlayer": "Web Player",
     "tv": "TV",
     "other": "Other"
+  },
+  "general": {
+    "and": "and"
+  },
+  "features": {
+    "title": "Tools and Features",
+    "subtitle": "Visualize the data in your Extended Streaming History and maybe rediscover a few forgotten favorites along the way.",
+    "extras": {
+      "dateRange": {
+        "title": "Date Range Filter",
+        "subtitle": "Filter all views to a custom time window"
+      },
+      "generalStats": {
+        "title": "General Stats",
+        "subtitle": "Your listening time, unique songs, and artists at a glance"
+      },
+      "platforms": {
+        "title": "Platforms",
+        "subtitle": "See which devices and apps you use most"
+      },
+      "searchByArtist": {
+        "title": "Search by Artist",
+        "subtitle": "Find and browse tracks by a specific artist"
+      },
+      "trackStats": {
+        "title": "Single Track Stats",
+        "subtitle": "Click any row to see detailed skip and listening stats"
+      },
+      "previewPlayer": {
+        "title": "Track Preview Player",
+        "subtitle": "Play a 30-second preview directly in the app"
+      }
+    }
   }
 }
