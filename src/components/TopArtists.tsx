@@ -4,7 +4,6 @@ import { formatMsPlain } from "@/utils/formatTime";
 import { useTranslation } from "react-i18next";
 import { Modal } from "@/components/Modal";
 import { TopTracks } from "@/components/TopTracks";
-import { RiMenuSearchLine } from "react-icons/ri";
 import { HiSearch } from "react-icons/hi";
 
 interface TopArtistsProps {
