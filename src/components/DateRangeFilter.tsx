@@ -13,10 +13,12 @@ export const DateRangeFilter: React.FC = () => {
   const [rangeEnd, setRangeEnd] = useState<number>(0);
   const [months, setMonths] = useState<Date[]>([]);
   const [monthlyCounts, setMonthlyCounts] = useState<number[]>([]);
-  const [isDragging, setIsDragging] = useState<"start" | "end" | null>(null);
+  const [isDragging, setIsDragging] = useState<"start" | "end" | "bar" | null>(null);
   const sliderRef = useRef<HTMLDivElement>(null);
   const filterRef = useRef<HTMLDivElement>(null);
-
+  // Stored as a raw float (percentage space) to avoid the half-step jump that
+  // rounding at capture time would cause.
+  const dragOffsetRef = useRef<number>(0);
   const DEBOUNCE_TIME = 100;
 
   // Calculate months from raw data
@@ -94,26 +96,6 @@ export const DateRangeFilter: React.FC = () => {
     });
   };
 
-  const handleSliderClick = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!sliderRef.current || months.length === 0) return;
-
-    const rect = sliderRef.current.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    const percentage = x / rect.width;
-    const newIndex = Math.round(percentage * (maxMonthIndex - minMonthIndex) + minMonthIndex);
-    const clampedIndex = Math.max(minMonthIndex, Math.min(maxMonthIndex, newIndex));
-
-    // Determine which handle to move based on proximity
-    const distToStart = Math.abs(clampedIndex - rangeStart);
-    const distToEnd = Math.abs(clampedIndex - rangeEnd);
-
-    if (distToStart < distToEnd) {
-      setRangeStart(Math.min(clampedIndex, rangeEnd));
-    } else {
-      setRangeEnd(Math.max(clampedIndex, rangeStart));
-    }
-  };
-
   const handleMouseDown = (handle: "start" | "end") => (e: React.MouseEvent) => {
     e.stopPropagation();
     setIsDragging(handle);
@@ -123,6 +105,31 @@ export const DateRangeFilter: React.FC = () => {
     e.preventDefault(); // Prevent scrolling while dragging
     e.stopPropagation();
     setIsDragging(handle);
+  };
+
+  const beginBarDrag = (clientX: number) => {
+    if (!sliderRef.current) return;
+    const rect = sliderRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    // Store the offset in raw percentage space so no rounding error is baked
+    // in at capture time — rounding happens only when updating state.
+    const percentage = Math.max(0, Math.min(1, x / rect.width));
+    const range = maxMonthIndex - minMonthIndex;
+    const startPercentage = (rangeStart - minMonthIndex) / range;
+    dragOffsetRef.current = percentage - startPercentage;
+    setIsDragging("bar");
+  };
+
+  const handleBarMouseDown = (e: React.MouseEvent) => {
+    // stopPropagation prevents the mousedown from bubbling up to the slider.
+    e.stopPropagation();
+    beginBarDrag(e.clientX);
+  };
+
+  const handleBarTouchDown = (e: React.TouchEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    beginBarDrag(e.touches[0].clientX);
   };
 
   useEffect(() => {
@@ -142,13 +149,25 @@ export const DateRangeFilter: React.FC = () => {
 
       if (isDragging === "start") {
         setRangeStart(Math.min(newIndex, rangeEnd));
-      } else {
+      } else if (isDragging === "end") {
         setRangeEnd(Math.max(newIndex, rangeStart));
+      } else {
+        // Bar drag: translate the whole range, clamped to [min, max].
+        // The offset was captured in percentage space to avoid rounding jitter.
+        const range = maxMonthIndex - minMonthIndex;
+        const newStartPercentage = percentage - dragOffsetRef.current;
+        const newStart = Math.round(newStartPercentage * range + minMonthIndex);
+        const width = rangeEnd - rangeStart;
+        const clampedStart = Math.max(minMonthIndex, Math.min(maxMonthIndex - width, newStart));
+        setRangeStart(clampedStart);
+        setRangeEnd(clampedStart + width);
       }
     };
 
     const handleEnd = () => {
       window.umami?.track("Interacted with slider");
+      // dragOfetRef is reset so stale values can't bleed into future drags.
+      dragOffsetRef.current = 0;
       setIsDragging(null);
     };
 
@@ -193,14 +212,16 @@ export const DateRangeFilter: React.FC = () => {
         </ResponsiveContainer>
       </div>
       <div className="range-slider-container">
-        <div className="range-slider" ref={sliderRef} onClick={handleSliderClick}>
+        <div className="range-slider" ref={sliderRef}>
           <div className="range-track"></div>
           <div
-            className="range-track-active"
+            className={`range-track-active${isDragging === "bar" ? " range-track-active--dragging" : ""}`}
             style={{
               left: `${startPercentage}%`,
               width: `${endPercentage - startPercentage}%`,
             }}
+            onMouseDown={handleBarMouseDown}
+            onTouchStart={handleBarTouchDown}
           ></div>
           <div
             className="range-handle range-handle-start"

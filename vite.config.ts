@@ -7,8 +7,11 @@ import { vitePluginUmami } from "@nischolas/vite-plugin-umami-inline";
 export default defineConfig({
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)), // Alias for src folder
+      "@": fileURLToPath(new URL("./src", import.meta.url)),
     },
+  },
+  css: {
+    devSourcemap: true,
   },
   plugins: [
     react(),
