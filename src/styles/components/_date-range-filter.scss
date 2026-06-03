@@ -58,7 +58,7 @@
     position: relative;
     flex: 1;
     height: 30px;
-    cursor: pointer;
+    cursor: default;
     user-select: none;
     touch-action: none; // Prevent default touch behaviors like scrolling
   }
@@ -77,12 +77,44 @@
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    height: 2px;
-    background-color: $primary-color;
-    border-radius: 3px;
+    height: 16px;
+    cursor: grab;
+    // Transitions give snap-to feedback when handles are clicked, but must be
+    // suppressed while the bar is being dragged so it tracks the cursor
+    // without lag.
     transition:
       left 0.1s ease,
       width 0.1s ease;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      transform: translateY(-50%);
+      height: 2px;
+      background-color: $primary-color;
+      border-radius: 3px;
+      pointer-events: none;
+      transition: box-shadow 0.2s ease;
+    }
+
+    &:hover::before {
+      box-shadow: 0 0 0 4px rgba($primary-color, 0.2);
+    }
+
+    &:active {
+      cursor: grabbing;
+
+      &::before {
+        box-shadow: 0 0 0 4px rgba($primary-color, 0.3);
+      }
+    }
+
+    &--dragging {
+      transition: none;
+    }
   }
 
   .range-handle {
