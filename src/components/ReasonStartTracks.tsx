@@ -87,8 +87,8 @@ export const ReasonStartTracks: React.FC<ReasonStartTracksProps> = ({ reason_sta
                   }}
                 >
                   <td>{index + 1}</td>
-                  <td>{item.track.master_metadata_track_name || <em>{t("reasonStartTracks.unknownTrack")}</em>}</td>
-                  <td>{item.track.master_metadata_album_artist_name || <em>{t("reasonStartTracks.unknownArtist")}</em>}</td>
+                  <td className="sk">{item.track.master_metadata_track_name || <em>{t("reasonStartTracks.unknownTrack")}</em>}</td>
+                  <td className="sk">{item.track.master_metadata_album_artist_name || <em>{t("reasonStartTracks.unknownArtist")}</em>}</td>
                   {/* <td className="monospace">{item.count}</td> */}
                 </tr>
               );

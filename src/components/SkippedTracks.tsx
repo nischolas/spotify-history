@@ -90,9 +90,9 @@ export const SkippedTracks: React.FC<SkippedTracksProps> = ({ limit = 10, isModa
                   title={t("table.statsAndPreview")}
                 >
                   <td>{index + 1}</td>
-                  <td>{track.trackName}</td>
-                  <td>{track.artistName}</td>
-                  <td style={{ textAlign: "right" }}>
+                  <td className="sk">{track.trackName}</td>
+                  <td className="sk">{track.artistName}</td>
+                  <td className="sk" style={{ textAlign: "right" }}>
                     {skipRate}
                     <span className="muted">
                       % ({track.skipCount}/{track.totalPlays})

@@ -41,7 +41,6 @@
   opacity: 0;
   transform: translateY(50px);
   animation: flyin 500ms cubic-bezier(0.7, 0, 0.15, 1) forwards;
-  animation-delay: 500ms;
 }
 
 @keyframes flyin {
@@ -103,6 +102,21 @@
 
   .companion-tracks {
     grid-column: span 6;
+  }
+}
+
+.sk {
+  transition: opacity 3s ease-in-out;
+}
+
+.skeleton {
+  .sk {
+    // color: transparent !important;
+    // background-color: red;
+  }
+
+  .sk-opacity {
+    opacity: 0 !important;
   }
 }
 

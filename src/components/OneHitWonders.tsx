@@ -88,9 +88,9 @@ export const OneHitWonders: React.FC<OneHitWondersProps> = ({ limit = 10, isModa
                   title={t("table.statsAndPreview")}
                 >
                   <td>{index + 1}</td>
-                  <td>{item.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
-                  <td>{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
-                  <td className="monospace">{item.count || 0}</td>
+                  <td className="sk">{item.master_metadata_track_name || <em>{t("topTracks.unknownTrack")}</em>}</td>
+                  <td className="sk">{item.master_metadata_album_artist_name || <em>{t("topTracks.unknownArtist")}</em>}</td>
+                  <td className="monospace sk">{item.count || 0}</td>
                 </tr>
               );
             })}

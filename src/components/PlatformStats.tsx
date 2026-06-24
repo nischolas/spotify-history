@@ -64,8 +64,8 @@ export const PlatformStats = () => {
           >
             {!showLegend ? (
               <>
-                <span className="platform-legend-label">{label}</span>&nbsp;
-                <span className="platform-legend-pct">{pct.toFixed(0)}%</span>
+                <span className="platform-legend-label sk-opacity">{label}</span>&nbsp;
+                <span className="platform-legend-pct sk-opacity">{pct.toFixed(0)}%</span>
               </>
             ) : (
               <>&nbsp;</>
@@ -78,8 +78,8 @@ export const PlatformStats = () => {
           {segments.map(({ bucket, label, pct, color }) => (
             <div key={bucket} className="platform-legend-item">
               <span className="platform-legend-dot" style={{ backgroundColor: color }} />
-              <span className="platform-legend-label">{label}</span>
-              <span className="platform-legend-pct">{pct.toFixed(0)}%</span>
+              <span className="platform-legend-label sk-opacity">{label}</span>
+              <span className="platform-legend-pct sk-opacity">{pct.toFixed(0)}%</span>
             </div>
           ))}
         </div>
