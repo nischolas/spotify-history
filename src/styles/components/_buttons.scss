@@ -21,6 +21,19 @@
   }
 }
 
+.tour-btn {
+  background-color: $primary-color;
+  border-color: transparent;
+  color: black;
+  font-weight: 700;
+
+  &:hover {
+    background-color: $primary-hover;
+    border-color: transparent;
+    color: black;
+  }
+}
+
 .filter-buttons {
   display: flex;
   gap: 0.5rem;

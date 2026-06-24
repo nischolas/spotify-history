@@ -29,7 +29,7 @@ export const GeneralStats = () => {
   if (aggregatedData.length === 0) return null;
 
   return (
-    <div className="general-stats">
+    <div className="general-stats" data-step="generalstats">
       <div className="stat-card">
         <span className="stat-value time-value">
           {stats.totalTime.days}

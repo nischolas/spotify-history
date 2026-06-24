@@ -20,10 +20,36 @@ import { HiArrowsRightLeft } from "react-icons/hi2";
 import { Features } from "./components/Features";
 import { SampleDataButton } from "@/components/SampleDataButton";
 
+import { useJoyride } from "react-joyride";
+import { BsFillRocketTakeoffFill } from "react-icons/bs";
+
 function App() {
   const { isDataLoaded, reset, initialize } = useSpotifyStore();
   const { trackUri, trackName, artistName, closePlayer } = usePreviewPlayer();
   const { t } = useTranslation();
+
+  const steps = [
+    { content: "Allgemeine Infos über deinen Datensatz", target: '[data-step="generalstats"]' },
+    { content: "Ziehe den Slider um den Zeitraum einzugrenzen", target: '[data-step="daterangefilter"]' },
+    { content: "Sortiere nach addierter Zeit oder Anzahl der Wiedergaben", target: '[data-step="toptracks-sortby"]' },
+    { content: "Klicke für eine erweiterte Liste", target: '[data-step="toptracks-showmore"]' },
+    { content: "Klick auf einen Track für mehr Details", target: ".table-container tr:nth-child(3)" },
+  ];
+
+  const { controls, on, Tour } = useJoyride({
+    continuous: true,
+    steps,
+    options: {
+      skipBeacon: true,
+      scrollOffset: 200,
+    },
+  });
+
+  useEffect(() => {
+    return on("tour:end", () => {
+      console.log("Tour finished!");
+    });
+  }, [on]);
 
   useEffect(() => {
     document.title = t("app.title");
@@ -39,6 +65,7 @@ function App() {
 
   return (
     <div className={`app-container${isDataLoaded ? " has-data" : ""}`}>
+      {Tour}
       <main>
         {!isDataLoaded ? (
           <>
@@ -77,9 +104,15 @@ function App() {
             <div className="data-section">
               <div className="actions">
                 <h1>{t("app.title")}</h1>
-                <button onClick={reset} className="reset-btn">
-                  <HiArrowsRightLeft /> {t("app.importDifferent")}
-                </button>
+                <div className="actions-btns">
+                  <button onClick={() => controls.start()} className="reset-btn tour-btn">
+                    <BsFillRocketTakeoffFill />
+                    Kurze Einführung
+                  </button>
+                  <button onClick={reset} className="reset-btn">
+                    <HiArrowsRightLeft /> {t("app.importDifferent")}
+                  </button>
+                </div>
               </div>
               <div className="sections">
                 <GeneralStats />
