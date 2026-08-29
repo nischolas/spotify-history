@@ -79,7 +79,7 @@ export const PlatformStats = () => {
             <div key={bucket} className="platform-legend-item">
               <span className="platform-legend-dot" style={{ backgroundColor: color }} />
               <span className="platform-legend-label">{label}</span>
-              <span className="platform-legend-pct">{pct.toFixed(0)}%</span>
+              <span className="platform-legend-pct">{pct.toFixed(1)}%</span>
             </div>
           ))}
         </div>

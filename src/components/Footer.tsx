@@ -25,13 +25,13 @@ export const Footer: React.FC = () => {
               .
             </p>
             <div className="footer-links">
+              <a href="https://github.com/nischolas/antigravity-spotify" target="_blank" rel="noopener noreferrer">
+                GitHub
+              </a>
               <a href="https://nicholas-mathi.eu/impressum" target="_blank" rel="noopener noreferrer">
                 {t("footer.legal")}
               </a>
               <a onClick={() => setShowMoreModal(true)}>{t("privacy.title")}</a>
-              <a href="https://github.com/nischolas/antigravity-spotify" target="_blank" rel="noopener noreferrer">
-                Source
-              </a>
             </div>
           </div>
 
