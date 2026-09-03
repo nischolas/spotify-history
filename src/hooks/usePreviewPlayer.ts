@@ -13,7 +13,7 @@ export const usePreviewPlayer = create<PreviewPlayerStore>((set) => ({
   trackName: null,
   artistName: null,
   openPlayer: (uri: string, name: string, artist: string) => {
-    window.umami?.track(`Opened drawer with ${name} by ${artist}`);
+    window.umami?.track(`Opened track preview drawer`);
     set({ trackUri: uri, trackName: name, artistName: artist });
   },
   closePlayer: () => set({ trackUri: null, trackName: null, artistName: null }),
