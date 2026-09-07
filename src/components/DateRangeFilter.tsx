@@ -166,7 +166,7 @@ export const DateRangeFilter: React.FC = () => {
 
     const handleEnd = () => {
       window.umami?.track("Interacted with slider");
-      // dragOfetRef is reset so stale values can't bleed into future drags.
+      // dragOffsetRef is reset so stale values can't bleed into future drags.
       dragOffsetRef.current = 0;
       setIsDragging(null);
     };
